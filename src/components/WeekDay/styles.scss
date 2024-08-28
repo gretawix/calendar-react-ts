@@ -1,0 +1,52 @@
+.one-day {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px 0 6px 0;
+  position: relative;
+  min-width: var(--min-col-width);
+  .divider-vertical {
+    position: absolute;
+    bottom: 0;
+    height: 20px;
+    left: 0;
+    border-left: 1px solid var(--grey-light);
+  }
+  .day-name {
+    font-size: 11px;
+    line-height: 1;
+    color: var(--grey-medium-dark);
+    padding-bottom: 4px;
+    text-align: center;
+    text-transform: uppercase;
+    font-weight: 500;
+  }
+
+  .day-number {
+    width: 46px;
+    height: 46px;
+    line-height: 1;
+    border-radius: 50%;
+    background-color: transparent;
+    font-weight: 400;
+    color: var(--grey-dark);
+    font-size: 24px;
+    transition: background-color 0.5s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    &:hover {
+      background-color: var(--grey-super-light);
+    }
+  }
+  &.active {
+    .day-name {
+      color: var(--blue);
+    }
+    .day-number {
+      background-color: var(--blue);
+      color: var(--white);
+    }
+  }
+}

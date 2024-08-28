@@ -1,0 +1,43 @@
+@import '../../assets/common';
+
+.time-grid {
+  @include gridStyling;
+  height: calc(100% - var(--week-days-height));
+}
+
+.cell-height {
+  height: var(--cell-height);
+}
+.hours-labels-column {
+  @include verticalScrollStyle;
+  padding-bottom: var(--scrollbar-width);
+  &:hover {
+    overflow: hidden;
+  }
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  .hour-label-cell {
+    position: relative;
+    .hour {
+      @include hourStyle;
+      position: absolute;
+      right: 0;
+      top: -8px;
+    }
+    &:first-child {
+      .hour {
+        visibility: hidden;
+      }
+    }
+  }
+}
+
+.hours-cells-all {
+  @include columnGridStyling;
+  @include verticalScrollStyle;
+  .divider,
+  .week-days {
+    border-bottom: 1px solid var(--grey-light);
+  }
+}
