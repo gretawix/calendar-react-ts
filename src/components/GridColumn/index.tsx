@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import type { WeekDayType } from '../../types/types';
 import './styles.scss';
 
@@ -17,4 +18,4 @@ const GridColumn: React.FC<GridColumnProps> = ({ day }) => {
   );
 };
 
-export default GridColumn;
+export default memo(GridColumn);

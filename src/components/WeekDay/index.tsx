@@ -1,3 +1,4 @@
+import { memo } from 'react';
 import type { WeekDayType } from '../../types/types';
 import './styles.scss';
 
@@ -21,4 +22,4 @@ const WeekDay: React.FC<WeekDayProps> = ({ day, isToday }) => {
     </div>
   );
 };
-export default WeekDay;
+export default memo(WeekDay);

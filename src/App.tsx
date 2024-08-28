@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useState } from 'react';
 import WeekDaysRow from './components/WeekDaysRow';
 import {
   createDay,
@@ -26,4 +26,4 @@ function App() {
   );
 }
 
-export default App;
+export default memo(App);

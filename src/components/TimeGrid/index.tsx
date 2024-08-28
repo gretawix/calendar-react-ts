@@ -1,7 +1,7 @@
 import GridColumn from '../GridColumn';
 import type { WeekDayType } from '../../types/types';
 import './styles.scss';
-import { useRef } from 'react';
+import { memo, useRef } from 'react';
 
 type TimeGridProps = {
   week: WeekDayType[];
@@ -54,4 +54,4 @@ const TimeGrid: React.FC<TimeGridProps> = ({ week, hours }) => {
   );
 };
 
-export default TimeGrid;
+export default memo(TimeGrid);

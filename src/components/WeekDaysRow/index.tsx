@@ -1,6 +1,7 @@
 import WeekDay from '../WeekDay';
 import type { WeekDayType } from '../../types/types';
 import './styles.scss';
+import { memo } from 'react';
 
 type WeekDaysRowProps = {
   today: WeekDayType;
@@ -28,4 +29,4 @@ const WeekDaysRow: React.FC<WeekDaysRowProps> = ({ today, timeZone, week }) => {
   );
 };
 
-export default WeekDaysRow;
+export default memo(WeekDaysRow);
