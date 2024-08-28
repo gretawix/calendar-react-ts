@@ -1,9 +1,9 @@
 import { memo } from 'react';
-import type { WeekDayType } from '../../types/types';
+import type { WeekDay } from '../../types/main';
 import './styles.scss';
 
 type GridColumnProps = {
-  day: WeekDayType;
+  day: WeekDay;
 };
 
 const GridColumn: React.FC<GridColumnProps> = ({ day }) => {

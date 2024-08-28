@@ -2,11 +2,11 @@ import { forwardRef, memo, useRef } from 'react';
 import GridColumn from '../GridColumn';
 import { useScroll } from '../../hooks/useScroll';
 
-import type { ScrollRef, WeekDayType } from '../../types/types';
+import type { ScrollRef, OneWeekDay } from '../../types/main';
 import './styles.scss';
 
 type TimeGridProps = {
-  week: WeekDayType[];
+  week: OneWeekDay[];
   hours: string[];
   onScroll: () => void;
 };

@@ -1,12 +1,12 @@
 import WeekDay from '../WeekDay';
-import type { WeekDayType } from '../../types/types';
+import type { OneWeekDay } from '../../types/main';
 import './styles.scss';
 import { forwardRef, memo } from 'react';
 
 type WeekDaysRowProps = {
-  today: WeekDayType;
+  today: OneWeekDay;
   timeZone: string;
-  week: WeekDayType[];
+  week: OneWeekDay[];
   onScroll: () => void;
 };
 

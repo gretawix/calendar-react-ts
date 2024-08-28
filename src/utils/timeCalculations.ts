@@ -1,9 +1,9 @@
-import { WeekDayType } from '../types/types';
+import { OneWeekDay } from '../types/main';
 
 const daysInWeek = 7;
 const hoursInDay = 24;
 
-const createDay = (date: Date): WeekDayType => {
+const createDay = (date: Date): OneWeekDay => {
   const [weekDay, month, day, year] = date.toString().split(' ');
   return {
     weekDay,
@@ -31,14 +31,14 @@ const getFirstDayInTimeGrid = (date: Date): Date => {
   const currentDate = new Date(date);
   const currentWeekDay = currentDate.getDay();
   const difference = (currentWeekDay === 0 ? -6 : 1) - currentWeekDay;
-  const monday = new Date();
+  const monday = new Date(date);
   monday.setDate(monday.getDate() + difference);
 
   return monday;
 };
 
 const getCurrentWeek = (baseDay: Date) => {
-  const week: WeekDayType[] = [];
+  const week: OneWeekDay[] = [];
   const monday = getFirstDayInTimeGrid(baseDay);
 
   for (let i = 0; i < daysInWeek; i++) {

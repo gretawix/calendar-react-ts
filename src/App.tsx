@@ -9,10 +9,12 @@ import {
 import TimeGrid from './components/TimeGrid';
 import './App.scss';
 import { useScroll } from './hooks/useScroll';
+import Modal from './components/Modal';
 
 function App() {
   const [baseDay] = useState(new Date());
   const week = getCurrentWeek(baseDay);
+
   const hoursList = createHoursList();
   const today = createDay(new Date());
   const timeZone = getTimeZone(new Date());
@@ -46,6 +48,7 @@ function App() {
           onScroll={onTimeGridScroll}
           ref={timeGridRef}
         />
+        <Modal />
       </div>
     </div>
   );

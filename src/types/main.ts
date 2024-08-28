@@ -1,4 +1,4 @@
-export type WeekDayType = {
+export type OneWeekDay = {
   weekDay: string;
   day: number;
   month: string;
