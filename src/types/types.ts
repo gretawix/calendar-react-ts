@@ -5,3 +5,5 @@ export type WeekDayType = {
   year: number;
   id: string;
 };
+
+export type ScrollRef = React.RefObject<HTMLDivElement>;

@@ -1,24 +1,26 @@
+import { forwardRef, memo, useRef } from 'react';
 import GridColumn from '../GridColumn';
-import type { WeekDayType } from '../../types/types';
+import { useScroll } from '../../hooks/useScroll';
+
+import type { ScrollRef, WeekDayType } from '../../types/types';
 import './styles.scss';
-import { memo, useRef } from 'react';
 
 type TimeGridProps = {
   week: WeekDayType[];
   hours: string[];
+  onScroll: () => void;
 };
 
-const TimeGrid: React.FC<TimeGridProps> = ({ week, hours }) => {
+const TimeGrid = forwardRef<HTMLDivElement, TimeGridProps>(function TimeGrid(
+  { week, hours, onScroll },
+  ref
+) {
   const hourColRef = useRef<HTMLDivElement>(null);
-  const gridRef = useRef<HTMLDivElement>(null);
 
-  const handleScroll = (
-    sourceDiv: React.RefObject<HTMLDivElement>,
-    targetDiv: React.RefObject<HTMLDivElement>
-  ) => {
-    if (sourceDiv.current && targetDiv.current) {
-      targetDiv.current.scrollTop = sourceDiv?.current?.scrollTop;
-    }
+  const { handleVerticalScroll } = useScroll();
+  const handleGridScroll = () => {
+    handleVerticalScroll(ref as ScrollRef, hourColRef);
+    onScroll();
   };
 
   return (
@@ -27,7 +29,7 @@ const TimeGrid: React.FC<TimeGridProps> = ({ week, hours }) => {
         className="hours-labels-column"
         id="hours-col"
         ref={hourColRef}
-        onScroll={() => handleScroll(hourColRef, gridRef)}
+        onScroll={() => handleVerticalScroll(hourColRef, ref as ScrollRef)}
       >
         {hours.map((hour) => (
           <div key={hour} className="hour-label-cell cell-height">
@@ -38,8 +40,8 @@ const TimeGrid: React.FC<TimeGridProps> = ({ week, hours }) => {
       <div
         className="hours-cells-all"
         id="days-hours-grid"
-        ref={gridRef}
-        onScroll={() => handleScroll(gridRef, hourColRef)}
+        ref={ref}
+        onScroll={handleGridScroll}
       >
         <div className="divider-column">
           {hours.map((hour) => (
@@ -52,6 +54,6 @@ const TimeGrid: React.FC<TimeGridProps> = ({ week, hours }) => {
       </div>
     </div>
   );
-};
+});
 
 export default memo(TimeGrid);
