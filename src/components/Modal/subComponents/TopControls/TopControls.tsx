@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import MaterialSymbol from '../../MaterialIcon/MaterialIcon';
+import MaterialSymbol from '../../../MaterialIcon/MaterialIcon';
 
 import './topControls.scss';
 

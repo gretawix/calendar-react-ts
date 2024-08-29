@@ -1,0 +1,7 @@
+@import '../../../../styles/common';
+
+.event-control-buttons {
+  @include alignButtons;
+  @include eventSideMargins;
+  justify-content: flex-end;
+}

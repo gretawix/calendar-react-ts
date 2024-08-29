@@ -30,3 +30,12 @@
   z-index: 0;
   --min-col-width: 81px;
 }
+
+@mixin alignButtons {
+  display: flex;
+  gap: 8px;
+}
+
+@mixin eventSideMargins {
+  padding: 0 16px;
+}

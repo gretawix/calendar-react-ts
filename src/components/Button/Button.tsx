@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import './button.scss';
+import '../../styles/buttons.scss';
 
 type ButtonProps = {
   title: string;

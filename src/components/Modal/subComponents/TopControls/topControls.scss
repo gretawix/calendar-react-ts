@@ -9,6 +9,7 @@
     padding: 2px;
     border-radius: 50%;
     background-color: transparent;
+    height: fit-content;
     &:hover {
       background-color: var(--grey-light);
     }

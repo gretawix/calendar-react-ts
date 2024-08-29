@@ -1,20 +1,8 @@
 import { memo } from 'react';
 
-import './materialIcon.scss';
+import type { IconName } from '../../types/main';
 
-type IconName =
-  | 'drag_handle'
-  | 'close'
-  | 'schedule'
-  | 'group'
-  | 'location_on'
-  | 'meeting_room'
-  | 'subject'
-  | 'attach_file'
-  | 'event'
-  | 'work'
-  | 'lock'
-  | 'notifications';
+import './materialIcon.scss';
 
 type MaterialSymbolProps = {
   iconName: IconName;
