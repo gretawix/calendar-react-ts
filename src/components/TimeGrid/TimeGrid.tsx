@@ -1,9 +1,10 @@
 import { forwardRef, memo, useRef } from 'react';
-import GridColumn from '../GridColumn';
+import GridColumn from '../GridColumn/GridColumn';
 import { useScroll } from '../../hooks/useScroll';
 
 import type { ScrollRef, OneWeekDay } from '../../types/main';
-import './styles.scss';
+
+import './timeGrid.scss';
 
 type TimeGridProps = {
   week: OneWeekDay[];

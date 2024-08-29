@@ -1,7 +1,9 @@
-import WeekDay from '../WeekDay';
-import type { OneWeekDay } from '../../types/main';
-import './styles.scss';
+import WeekDay from '../WeekDay/WeekDay';
 import { forwardRef, memo } from 'react';
+
+import type { OneWeekDay } from '../../types/main';
+
+import './weekDayRow.scss';
 
 type WeekDaysRowProps = {
   today: OneWeekDay;

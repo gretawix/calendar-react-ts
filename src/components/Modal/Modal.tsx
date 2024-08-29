@@ -1,15 +1,14 @@
 import { memo } from 'react';
+import MaterialSymbol from '../MaterialIcon/MaterialIcon';
+import Button from '../Button/Button';
+import TopControls from './subComponents/TopControls';
 
-import './styles.scss';
-import MaterialSymbol from '../MaterialSymbol';
+import './modal.scss';
 
 const Modal = () => {
   return (
     <div className="event-modal" id="event-modal">
-      <div className="top-controls">
-        <MaterialSymbol iconName="drag_handle" isClickable={true} />
-        <MaterialSymbol iconName="close" isClickable={true} />
-      </div>
+      <TopControls />
       <div className="event-content">
         <div className="event-title">
           <label className="text-input-label large" htmlFor="title">
@@ -24,11 +23,9 @@ const Modal = () => {
         </div>
         <div className="event-settings">
           <div className="event-type-buttons">
-            <button type="button" className="selected">
-              Event
-            </button>
-            <button type="button">Task</button>
-            <button type="button">Appointment schedule</button>
+            <Button title="Event" styleType="selected" />
+            <Button title="Task" />
+            <Button title="Appointment schedule" />
           </div>
           <div className="event-settings-selection">
             <div className="time-date single-setting-section">
@@ -106,9 +103,7 @@ const Modal = () => {
                             All day <input type="checkbox" id="all-day" />
                             <span className="checkmark"></span>
                           </label>
-                          <button type="button" id="time-zone">
-                            Time zone
-                          </button>
+                          <Button title="Time zone" id="time-zone" />
                         </div>
                         <div className="select-input">
                           <button type="button" className="dropdown">
@@ -140,14 +135,12 @@ const Modal = () => {
               </div>
             </div>
             <div className="find-time no-icon modal-event-side-margins">
-              <button type="button" className="blue">
-                Find a time
-              </button>
+              <Button title="Find a time" styleType="inline" />
             </div>
             <div className="guests single-setting-section">
               <div className="has-icon modal-event-side-margins preview-settings">
                 <div className="modal-icon">
-                  <i className="material-symbols-outlined small"> group </i>
+                  <MaterialSymbol iconName="group" small={true} />
                 </div>
                 <div className="selection-content">
                   <div className="to-select">
@@ -158,7 +151,7 @@ const Modal = () => {
               <div className="full-settings">
                 <div className="has-icon modal-event-side-margins">
                   <div className="modal-icon">
-                    <i className="material-symbols-outlined small"> group </i>
+                    <MaterialSymbol iconName="group" small={true} />
                   </div>
                   <div className="selection-content">
                     <div className="settings">
@@ -183,17 +176,16 @@ const Modal = () => {
                   className="custom-icon"
                 />
               </div>
-              <button className="cta google-meet-selection">
-                Add Google Meet video conferencing
-              </button>
+              <Button
+                styleType="cta"
+                className="google-meet-selection"
+                title="Add Google Meet video conferencing"
+              />
             </div>
             <div className="location single-setting-section with-separator">
               <div className="has-icon modal-event-side-margins preview-settings">
                 <div className="modal-icon">
-                  <i className="material-symbols-outlined small">
-                    {' '}
-                    location_on{' '}
-                  </i>
+                  <MaterialSymbol iconName="location_on" small={true} />
                 </div>
                 <div className="selection-content">
                   <div className="to-select">
@@ -209,10 +201,7 @@ const Modal = () => {
               <div className="full-settings">
                 <div className="has-icon modal-event-side-margins">
                   <div className="modal-icon">
-                    <i className="material-symbols-outlined small">
-                      {' '}
-                      meeting_room{' '}
-                    </i>
+                    <MaterialSymbol iconName="meeting_room" small={true} />
                   </div>
                   <div className="selection-content">
                     <div className="settings">
@@ -229,10 +218,7 @@ const Modal = () => {
                 </div>
                 <div className="has-icon modal-event-side-margins">
                   <div className="modal-icon">
-                    <i className="material-symbols-outlined small">
-                      {' '}
-                      location_on{' '}
-                    </i>
+                    <MaterialSymbol iconName="location_on" small={true} />
                   </div>
                   <div className="selection-content">
                     <div className="settings">
@@ -252,7 +238,7 @@ const Modal = () => {
             <div className="description single-setting-section with-separator">
               <div className="has-icon modal-event-side-margins preview-settings">
                 <div className="modal-icon">
-                  <i className="material-symbols-outlined small"> subject </i>
+                  <MaterialSymbol iconName="subject" small={true} />
                 </div>
                 <div className="selection-content">
                   <div className="to-select">
@@ -268,7 +254,7 @@ const Modal = () => {
               <div className="full-settings">
                 <div className="has-icon modal-event-side-margins">
                   <div className="modal-icon">
-                    <i className="material-symbols-outlined small"> subject </i>
+                    <MaterialSymbol iconName="subject" small={true} />
                   </div>
                   <div className="selection-content">
                     <div className="settings">Add description</div>
@@ -276,10 +262,7 @@ const Modal = () => {
                 </div>
                 <div className="has-icon modal-event-side-margins">
                   <div className="modal-icon">
-                    <i className="material-symbols-outlined small">
-                      {' '}
-                      attach_file{' '}
-                    </i>
+                    <MaterialSymbol iconName="attach_file" small={true} />
                   </div>
                   <div className="selection-content">
                     <div className="settings">Add attachment</div>
@@ -290,7 +273,7 @@ const Modal = () => {
             <div className="status single-setting-section with-separator">
               <div className="has-icon modal-event-side-margins preview-settings">
                 <div className="modal-icon">
-                  <i className="material-symbols-outlined small"> event </i>
+                  <MaterialSymbol iconName="event" small={true} />
                 </div>
                 <div className="selection-content">
                   <div className="to-select">
@@ -309,7 +292,7 @@ const Modal = () => {
               <div className="full-settings">
                 <div className="has-icon modal-event-side-margins">
                   <div className="modal-icon">
-                    <i className="material-symbols-outlined small"> event </i>
+                    <MaterialSymbol iconName="event" small={true} />
                   </div>
                   <div className="selection-content">
                     <div className="settings">name surname</div>
@@ -317,7 +300,7 @@ const Modal = () => {
                 </div>
                 <div className="has-icon modal-event-side-margins">
                   <div className="modal-icon">
-                    <i className="material-symbols-outlined small"> work </i>
+                    <MaterialSymbol iconName="work" small={true} />
                   </div>
                   <div className="selection-content">
                     <div className="settings">
@@ -340,7 +323,7 @@ const Modal = () => {
                 </div>
                 <div className="has-icon modal-event-side-margins">
                   <div className="modal-icon">
-                    <i className="material-symbols-outlined small"> lock </i>
+                    <MaterialSymbol iconName="lock" small={true} />
                   </div>
                   <div className="selection-content">
                     <div className="settings">
@@ -366,10 +349,7 @@ const Modal = () => {
                 </div>
                 <div className="has-icon modal-event-side-margins">
                   <div className="modal-icon">
-                    <i className="material-symbols-outlined small">
-                      {' '}
-                      notifications{' '}
-                    </i>
+                    <MaterialSymbol iconName="notifications" small={true} />
                   </div>
                   <div className="selection-content">
                     <div className="settings">
@@ -400,9 +380,10 @@ const Modal = () => {
                 <div className="no-icon">
                   <div className="selection-content">
                     <div className="settings">
-                      <button type="button" className="add-notification-btn">
-                        Add notification
-                      </button>
+                      <Button
+                        className="add-notification-btn"
+                        title="Add notification"
+                      />
                     </div>
                   </div>
                 </div>
@@ -411,10 +392,8 @@ const Modal = () => {
           </div>
         </div>
         <div className="event-control-buttons modal-event-side-margins">
-          <button type="button">More options</button>
-          <button type="button" className="cta" id="save-event-btn">
-            Save
-          </button>
+          <Button title="More options" />
+          <Button title="Save" styleType="cta" id="save-event-btn" />
         </div>
       </div>
     </div>

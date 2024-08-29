@@ -1,15 +1,15 @@
 import { memo, useRef, useState } from 'react';
-import WeekDaysRow from './components/WeekDaysRow';
+import WeekDaysRow from './components/WeekDaysRow/WeekDayRow';
 import {
   createDay,
   createHoursList,
   getCurrentWeek,
   getTimeZone,
 } from './utils/timeCalculations';
-import TimeGrid from './components/TimeGrid';
+import TimeGrid from './components/TimeGrid/TimeGrid';
 import './App.scss';
 import { useScroll } from './hooks/useScroll';
-import Modal from './components/Modal';
+import Modal from './components/Modal/Modal';
 
 function App() {
   const [baseDay] = useState(new Date());

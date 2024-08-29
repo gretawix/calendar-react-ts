@@ -1,6 +1,8 @@
 import { memo } from 'react';
+
 import type { OneWeekDay } from '../../types/main';
-import './styles.scss';
+
+import './weekDay.scss';
 
 type WeekDayProps = {
   day: OneWeekDay;
