@@ -33,7 +33,6 @@
 }
 
 .full-settings {
-  display: none;
   flex-direction: column;
   .has-icon {
     width: 100%;
@@ -43,13 +42,13 @@
     display: flex;
   }
 }
-.selection-content {
+.settings-width {
   width: calc(100% - var(--side-icon-width) - 8px);
 }
 .to-select {
   padding: 0;
   min-height: 36px;
-  width: 100%;
+  max-width: 100%;
   transition: background-color 0.5s ease;
   background-color: transparent;
   border-radius: 4px;
@@ -65,7 +64,6 @@
 .action-description {
   display: flex;
   flex-direction: row;
-  justify-content: center;
   align-items: center;
   font-size: 0.75rem;
   line-height: 20px;
@@ -109,7 +107,6 @@
   }
 }
 
-.guests,
 .location,
 .description {
   .to-select {
@@ -123,55 +120,9 @@
   }
 }
 
-.time-date {
-  .to-select {
-    p {
-      padding-top: 6px;
-      display: flex;
-      flex-direction: row;
-      flex-wrap: wrap;
-    }
-    .clickable {
-      margin: 0 8px;
-    }
-    .clickable-wrapper {
-      display: block;
-    }
-  }
-  .settings {
-    .time-date-inputs-wrapper {
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      justify-content: flex-start;
-      .date-input {
-        width: 120px;
-      }
-      .time-input {
-        width: 74px;
-      }
-    }
-    button {
-      color: var(--grey-dark);
-      font-weight: 400;
-    }
-    .time-date-other-settings {
-      display: flex;
-      flex-direction: row;
-      align-items: flex-start;
-    }
-    .checkbox-input {
-      margin-left: 8px;
-    }
-  }
-}
-
-.guests,
 .location {
-  .settings {
-    input {
-      width: 100%;
-    }
+  input {
+    width: 100%;
   }
 }
 

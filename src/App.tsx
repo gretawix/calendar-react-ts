@@ -7,9 +7,10 @@ import {
   getTimeZone,
 } from './utils/timeCalculations';
 import TimeGrid from './components/TimeGrid/TimeGrid';
-import './App.scss';
 import { useScroll } from './hooks/useScroll';
 import Modal from './components/Modal/Modal';
+
+import './App.scss';
 
 function App() {
   const [baseDay] = useState(new Date());

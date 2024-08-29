@@ -1,0 +1,40 @@
+.time-date-select {
+  p {
+    padding-top: 6px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .clickable {
+    margin: 0 8px;
+  }
+  .clickable-wrapper {
+    display: block;
+  }
+}
+.time-date-settings {
+  .time-date-inputs-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    .date-input {
+      width: 120px;
+    }
+    .time-input {
+      width: 74px;
+    }
+  }
+  button {
+    color: var(--grey-dark);
+    font-weight: 400;
+  }
+  .time-date-other-settings {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .checkbox-input {
+    margin-left: 8px;
+  }
+}
