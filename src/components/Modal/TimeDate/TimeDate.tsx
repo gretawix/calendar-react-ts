@@ -35,10 +35,10 @@ const TimeDate = () => {
           >
             <div className="time-date-select">
               <p>
-                <Button className="clickable" title={date} id="date-btn" />
-                <Button className="clickable" title={startTime} id="date-btn" />
+                <Button styleType="clickable" title={date} id="date-btn" />
+                <Button styleType="clickable" title={startTime} id="date-btn" />
                 -
-                <Button className="clickable" title={endTime} id="date-btn" />
+                <Button styleType="clickable" title={endTime} id="date-btn" />
               </p>
               <ul className="action-description">
                 <li>Time zone</li>
