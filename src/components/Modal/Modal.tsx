@@ -2,7 +2,7 @@ import { memo, useCallback } from 'react';
 import Button from '../Button/Button';
 import TopControls from './subComponents/TopControls/TopControls';
 import ControlButtons from './subComponents/ControlButtons/ControlButtons';
-import EventTitle from './subComponents/EventTile/EventTitle';
+import EventTitle from './subComponents/EventTitle/EventTitle';
 import EventSettings from './subComponents/EventSettings/EventSettings';
 
 import './modal.scss';
