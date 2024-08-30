@@ -9,12 +9,13 @@ import './timeGrid.scss';
 type TimeGridProps = {
   week: OneWeekDay[];
   hours: string[];
+  activeTileColId: string | null;
   onHorizontalScroll: () => void;
-  onColumnClick: () => void;
+  onColumnClick: (id: string) => void;
 };
 
 const TimeGrid = forwardRef<HTMLDivElement, TimeGridProps>(function TimeGrid(
-  { week, hours, onHorizontalScroll, onColumnClick },
+  { week, hours, activeTileColId, onHorizontalScroll, onColumnClick },
   ref
 ) {
   const hourColRef = useRef<HTMLDivElement>(null);
@@ -52,7 +53,12 @@ const TimeGrid = forwardRef<HTMLDivElement, TimeGridProps>(function TimeGrid(
           ))}
         </div>
         {week.map((oneDay) => (
-          <GridColumn key={oneDay.id} onClick={onColumnClick} />
+          <GridColumn
+            key={oneDay.id}
+            columnId={oneDay.id}
+            onClick={() => onColumnClick(oneDay.id)}
+            tileIsOpen={oneDay.id === activeTileColId}
+          />
         ))}
       </div>
     </div>

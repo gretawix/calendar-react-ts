@@ -1,9 +1,18 @@
 import { memo } from 'react';
 
-const Tile = () => {
+import './tile.scss';
+
+type TyleProps = {
+  existingEvent?: boolean;
+};
+
+const Tile = ({ existingEvent = false }: TyleProps) => {
   return (
-    <div>
-      <div>Tile</div>
+    <div
+      className={`event-tile regular ${!existingEvent ? 'placeholder' : ''}`}
+    >
+      <p className="event-tile-title">(no title)</p>
+      <p className="event-tile-time">08:30 - 09:30</p>
     </div>
   );
 };

@@ -14,6 +14,7 @@ import './App.scss';
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [activeTileColId, setActiveTileColId] = useState<string | null>(null);
   const [baseDay] = useState(new Date());
 
   const week = useMemo(() => getCurrentWeek(baseDay), [baseDay]);
@@ -36,12 +37,14 @@ function App() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const openModal = useCallback(() => {
+  const handleColumnClick = useCallback((columnId: string) => {
     setIsModalOpen(true);
+    setActiveTileColId(columnId);
   }, []);
 
   const closeModal = useCallback(() => {
     setIsModalOpen(false);
+    setActiveTileColId(null);
   }, []);
 
   return (
@@ -59,7 +62,8 @@ function App() {
           hours={hoursList}
           onHorizontalScroll={onTimeGridScroll}
           ref={timeGridRef}
-          onColumnClick={openModal}
+          activeTileColId={activeTileColId}
+          onColumnClick={handleColumnClick}
         />
         {isModalOpen && <Modal closeModal={closeModal} />}
       </div>
