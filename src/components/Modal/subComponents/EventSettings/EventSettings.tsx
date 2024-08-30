@@ -9,11 +9,9 @@ const EventSettings = () => {
   return (
     <div className="event-settings-selection">
       <TimeDate />
-
       <GenericSetting>
         <Button title="Find a time" styleType="inline" />
       </GenericSetting>
-
       <GenericSetting iconName="google-meets">
         <Button
           style={{ marginLeft: 8 }}

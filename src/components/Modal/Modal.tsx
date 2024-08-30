@@ -14,7 +14,8 @@ type ModalProps = {
 const Modal = ({ closeModal }: ModalProps) => {
   const saveEvent = useCallback(() => {
     closeModal();
-  }, [closeModal]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="event-modal" id="event-modal">

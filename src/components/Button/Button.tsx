@@ -4,7 +4,7 @@ import '../../styles/buttons.scss';
 
 type ButtonProps = {
   title: string;
-  styleType?: 'selected' | 'cta' | 'inline';
+  styleType?: 'selected' | 'cta' | 'inline' | 'clickable';
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
 const Button = ({ title, styleType, className, ...rest }: ButtonProps) => {
@@ -15,7 +15,7 @@ const Button = ({ title, styleType, className, ...rest }: ButtonProps) => {
         className={`${styleType ?? ''} ${className ?? ''}`.trim()}
         {...rest}
       >
-        {title}
+        {styleType === 'clickable' ? <span>{title}</span> : title}
       </button>
     </>
   );
