@@ -12,7 +12,7 @@ const Guests = ({ preview = true }: { preview?: boolean }) => {
         <input
           type="text"
           id="guests"
-          className="standard-input date-input"
+          className="standard-input "
           placeholder="Add guests"
         />
       </label>

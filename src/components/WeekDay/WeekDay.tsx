@@ -11,13 +11,7 @@ type WeekDayProps = {
 
 const WeekDay: React.FC<WeekDayProps> = ({ day, isToday }) => {
   return (
-    <div
-      className={`one-day cell-width ${isToday && 'active'}`}
-      data-weekday={day.weekDay}
-      data-month={day.month}
-      data-day={day.day}
-      data-year={day.year}
-    >
+    <div className={`one-day cell-width ${isToday && 'active'}`}>
       <div className="divider-vertical"></div>
       <p className="day-name">{day.weekDay}</p>
       <p className="day-number">{day.day}</p>

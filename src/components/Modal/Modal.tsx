@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import Button from '../Button/Button';
 import TopControls from './subComponents/TopControls/TopControls';
 import ControlButtons from './subComponents/ControlButtons/ControlButtons';
@@ -7,10 +7,18 @@ import EventSettings from './subComponents/EventSettings/EventSettings';
 
 import './modal.scss';
 
-const Modal = () => {
+type ModalProps = {
+  closeModal: () => void;
+};
+
+const Modal = ({ closeModal }: ModalProps) => {
+  const saveEvent = useCallback(() => {
+    closeModal();
+  }, [closeModal]);
+
   return (
     <div className="event-modal" id="event-modal">
-      <TopControls />
+      <TopControls onCloseModal={closeModal} />
       <div className="event-content">
         <EventTitle />
         <div className="event-settings">
@@ -21,7 +29,7 @@ const Modal = () => {
           </div>
           <EventSettings />
         </div>
-        <ControlButtons />
+        <ControlButtons onSaveClick={saveEvent} />
       </div>
     </div>
   );

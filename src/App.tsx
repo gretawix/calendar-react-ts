@@ -1,4 +1,4 @@
-import { memo, useRef, useState } from 'react';
+import { memo, useCallback, useMemo, useRef, useState } from 'react';
 import WeekDaysRow from './components/WeekDaysRow/WeekDayRow';
 import {
   createDay,
@@ -13,25 +13,36 @@ import Modal from './components/Modal/Modal';
 import './App.scss';
 
 function App() {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const [baseDay] = useState(new Date());
-  const week = getCurrentWeek(baseDay);
 
-  const hoursList = createHoursList();
-  const today = createDay(new Date());
-  const timeZone = getTimeZone(new Date());
+  const week = useMemo(() => getCurrentWeek(baseDay), [baseDay]);
+  const hoursList = useMemo(() => createHoursList(), []);
+  const today = useMemo(() => createDay(new Date()), []);
+  const timeZone = useMemo(() => getTimeZone(new Date()), []);
 
   const weekDaysRowRef = useRef<HTMLDivElement>(null);
   const timeGridRef = useRef<HTMLDivElement>(null);
 
   const { handleHorizontalScroll } = useScroll();
 
-  const onWeekDaysScroll = () => {
+  const onWeekDaysScroll = useCallback(() => {
     handleHorizontalScroll(weekDaysRowRef, timeGridRef);
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
-  const onTimeGridScroll = () => {
+  const onTimeGridScroll = useCallback(() => {
     handleHorizontalScroll(timeGridRef, weekDaysRowRef);
-  };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const openModal = useCallback(() => {
+    setIsModalOpen(true);
+  }, []);
+
+  const closeModal = useCallback(() => {
+    setIsModalOpen(false);
+  }, []);
 
   return (
     <div className="calendar">
@@ -46,10 +57,11 @@ function App() {
         <TimeGrid
           week={week}
           hours={hoursList}
-          onScroll={onTimeGridScroll}
+          onHorizontalScroll={onTimeGridScroll}
           ref={timeGridRef}
+          onColumnClick={openModal}
         />
-        <Modal />
+        {isModalOpen && <Modal closeModal={closeModal} />}
       </div>
     </div>
   );

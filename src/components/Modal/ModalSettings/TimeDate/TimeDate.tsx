@@ -1,10 +1,14 @@
-import { memo } from 'react';
+import { memo, useState } from 'react';
 import Button from '../../../Button/Button';
 import Dropdown from '../../../Dropdown/Dropdown';
 
 import './timeDate.scss';
 
 const TimeDate = ({ preview = true }: { preview?: boolean }) => {
+  const [date, setDate] = useState('Thursday, July 4');
+  const [startTime, setStartTime] = useState('09:00');
+  const [endTime, setEndTime] = useState('09:30');
+
   const repeatOptions = [
     'Does not repeat',
     'Daily',
@@ -20,20 +24,14 @@ const TimeDate = ({ preview = true }: { preview?: boolean }) => {
       <div className="time-date-select">
         <p>
           <span id="date-btn" className="clickable-wrapper">
-            <span className="clickable" data-clickable-id="date">
-              Thursday, July 4
-            </span>
+            <span className="clickable">{date}</span>
           </span>
           <span id="time-start-btn" className="clickable-wrapper">
-            <span className="clickable" data-clickable-id="time-start">
-              09:00
-            </span>
+            <span className="clickable">{startTime}</span>
           </span>
           –
           <span id="time-end-btn" className="clickable-wrapper">
-            <span className="clickable" data-clickable-id="time-end">
-              09:30
-            </span>
+            <span className="clickable">{endTime}</span>
           </span>
         </p>
         <ul className="action-description">
@@ -51,8 +49,8 @@ const TimeDate = ({ preview = true }: { preview?: boolean }) => {
             type="text"
             id="date"
             className="standard-input date-input"
-            value="Thursday, July 4"
-            data-clickable-input="date"
+            value={date}
+            onChange={(event) => setDate(event.target.value)}
           />
         </label>
         <label htmlFor="time-start" className="select-input">
@@ -60,7 +58,8 @@ const TimeDate = ({ preview = true }: { preview?: boolean }) => {
             type="text"
             id="time-start"
             className="standard-input time-input"
-            data-clickable-input="time-start"
+            value={startTime}
+            onChange={(event) => setStartTime(event.target.value)}
           />
         </label>
         <p>–</p>
@@ -69,7 +68,8 @@ const TimeDate = ({ preview = true }: { preview?: boolean }) => {
             type="text"
             id="time-end"
             className="standard-input time-input"
-            data-clickable-input="time-end"
+            value={endTime}
+            onChange={(event) => setEndTime(event.target.value)}
           />
         </label>
       </div>

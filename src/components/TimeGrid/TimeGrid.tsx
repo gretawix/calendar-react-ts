@@ -1,4 +1,4 @@
-import { forwardRef, memo, useRef } from 'react';
+import { forwardRef, memo, useCallback, useRef } from 'react';
 import GridColumn from '../GridColumn/GridColumn';
 import { useScroll } from '../../hooks/useScroll';
 
@@ -9,20 +9,22 @@ import './timeGrid.scss';
 type TimeGridProps = {
   week: OneWeekDay[];
   hours: string[];
-  onScroll: () => void;
+  onHorizontalScroll: () => void;
+  onColumnClick: () => void;
 };
 
 const TimeGrid = forwardRef<HTMLDivElement, TimeGridProps>(function TimeGrid(
-  { week, hours, onScroll },
+  { week, hours, onHorizontalScroll, onColumnClick },
   ref
 ) {
   const hourColRef = useRef<HTMLDivElement>(null);
 
   const { handleVerticalScroll } = useScroll();
-  const handleGridScroll = () => {
+  const handleGridScroll = useCallback(() => {
     handleVerticalScroll(ref as ScrollRef, hourColRef);
-    onScroll();
-  };
+    onHorizontalScroll();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className="time-grid">
@@ -50,7 +52,7 @@ const TimeGrid = forwardRef<HTMLDivElement, TimeGridProps>(function TimeGrid(
           ))}
         </div>
         {week.map((oneDay) => (
-          <GridColumn key={oneDay.id} day={oneDay} />
+          <GridColumn key={oneDay.id} onClick={onColumnClick} />
         ))}
       </div>
     </div>
