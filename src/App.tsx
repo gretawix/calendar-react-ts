@@ -9,11 +9,12 @@ import {
 import TimeGrid from './components/TimeGrid/TimeGrid';
 import { useScroll } from './hooks/useScroll';
 import Modal from './components/Modal/Modal';
+import { useModal } from './hooks/useModal';
 
 import './App.scss';
 
 function App() {
-  const [isModalOpen, setIsModalOpen] = useState(false);
+  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeTileColId, setActiveTileColId] = useState<string | null>(null);
   const [baseDay] = useState(new Date());
 
@@ -26,6 +27,7 @@ function App() {
   const timeGridRef = useRef<HTMLDivElement>(null);
 
   const { handleHorizontalScroll } = useScroll();
+  const { isModalOpen, openModal, closeModal } = useModal();
 
   const onWeekDaysScroll = useCallback(() => {
     handleHorizontalScroll(weekDaysRowRef, timeGridRef);
@@ -38,13 +40,9 @@ function App() {
   }, []);
 
   const handleColumnClick = useCallback((columnId: string) => {
-    setIsModalOpen(true);
+    openModal();
     setActiveTileColId(columnId);
-  }, []);
-
-  const closeModal = useCallback(() => {
-    setIsModalOpen(false);
-    setActiveTileColId(null);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -65,7 +63,14 @@ function App() {
           activeTileColId={activeTileColId}
           onColumnClick={handleColumnClick}
         />
-        {isModalOpen && <Modal closeModal={closeModal} />}
+        {isModalOpen && (
+          <Modal
+            closeModal={() => {
+              closeModal();
+              setActiveTileColId(null);
+            }}
+          />
+        )}
       </div>
     </div>
   );
