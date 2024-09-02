@@ -59,7 +59,7 @@ const TimeGrid = forwardRef<HTMLDivElement, TimeGridProps>(function TimeGrid(
             onClick={(event: React.MouseEvent) =>
               initNewEvent(event, oneDay.id)
             }
-            tileIsOpen={oneDay.id === activeTileColId}
+            newEvent={oneDay.id === activeTileColId}
           />
         ))}
       </div>

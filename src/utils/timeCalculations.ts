@@ -1,16 +1,30 @@
-import type { OneWeekDay } from '../types/main';
+import { isMonthShort, isWeekDayShort } from '../types/typeChecking';
+import type { OneWeekDay, Day } from '../types/main';
 
 const daysInWeek = 7;
 const hoursInDay = 24;
 
-const createDay = (date: Date): OneWeekDay => {
-  const [weekDay, month, day, year] = date.toString().split(' ');
+const constructBasicDay = (date: Date | string): Day => {
+  const dateString = typeof date === 'string' ? date : date.toString();
+
+  const [weekDay, month, day, year] = dateString.split(' ');
+  const validWeekDay = isWeekDayShort(weekDay) ? weekDay : 'Mon';
+  const validMonth = isMonthShort(month) ? month : 'Jan';
+
   return {
-    weekDay,
+    weekDay: validWeekDay,
     day: Number(day),
-    month,
+    month: validMonth,
     year: Number(year),
-    id: `${weekDay}-${day}-${month}-${year}`,
+  };
+};
+
+const createDay = (date: Date): OneWeekDay => {
+  const day = constructBasicDay(date);
+
+  return {
+    ...day,
+    id: date.toString(),
   };
 };
 
@@ -50,4 +64,20 @@ const getCurrentWeek = (baseDay: Date) => {
   return week;
 };
 
-export { createDay, getTimeZone, createHoursList, getCurrentWeek };
+const getTime = (minutes: number): string => {
+  const hours = Math.floor(minutes / 60);
+  const remainingMinutes = minutes % 60;
+  const formattedHours = hours.toString().padStart(2, '0');
+  const formattedMinutes = remainingMinutes.toString().padStart(2, '0');
+
+  return `${formattedHours}:${formattedMinutes}`;
+};
+
+export {
+  createDay,
+  getTimeZone,
+  createHoursList,
+  getCurrentWeek,
+  constructBasicDay,
+  getTime,
+};

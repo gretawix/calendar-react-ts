@@ -1,17 +1,19 @@
+import { cellHeightInPx } from '../contants/constants';
+
 export const positionModalX = (
   event: React.MouseEvent,
   modal: HTMLDivElement
 ) => {
   const modalWidth = modal.getBoundingClientRect().width;
-  const clickedElement = event.target;
-  if (clickedElement instanceof HTMLElement) {
-    const clickedElementBox = clickedElement?.getBoundingClientRect();
+  const clickedCol = event.target;
+  if (clickedCol instanceof HTMLElement) {
+    const clickedColBox = clickedCol.getBoundingClientRect();
 
-    if (clickedElementBox) {
+    if (clickedColBox) {
       modal.style.left = `${
-        clickedElementBox.left < modalWidth
-          ? clickedElementBox.left + clickedElementBox.width + 8
-          : clickedElementBox.left - modalWidth - 12
+        clickedColBox.left < modalWidth
+          ? clickedColBox.left + clickedColBox.width + 8
+          : clickedColBox.left - modalWidth - 12
       }px`;
     }
   }
@@ -36,4 +38,17 @@ export const positionModalY = (
   } else {
     modal.style.top = `${distanceFromClickToTop - bottomSpacing}px`;
   }
+};
+
+export const getTilePositionFromClick = (event: React.MouseEvent) => {
+  const clickedElement = event.target as HTMLElement;
+  const distanceFromTop = clickedElement?.getBoundingClientRect().top;
+  const clickPosition = event.clientY - distanceFromTop;
+  const increment = cellHeightInPx / 2;
+
+  return Math.floor(clickPosition / increment) * increment;
+};
+
+export const getTilePositionFromMinutes = (minutes: number) => {
+  return minutes / cellHeightInPx;
 };

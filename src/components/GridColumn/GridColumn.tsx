@@ -3,32 +3,43 @@ import EventTile from '../Tile/EventTile';
 
 import type { initNewEventFn } from '../../contexts/contextTypes';
 import './gridColumn.scss';
+import { useEvents } from '../../hooks/useEvents';
 
 type GridColumnProps = {
   onClick: initNewEventFn;
   columnId: string;
-  tileIsOpen: boolean;
+  newEvent: boolean;
 };
 
 const GridColumn: React.FC<GridColumnProps> = ({
   columnId,
-  tileIsOpen,
+  newEvent,
   onClick,
 }) => {
+  const { newEventTileRef, newEventData } = useEvents();
+
   return (
     <div
       className="hours-cells-column"
       onClick={(event) => onClick(event, columnId)}
       id={columnId}
     >
-      {tileIsOpen && <EventTile />}
+      {newEvent && newEventData && (
+        <EventTile
+          ref={newEventTileRef}
+          existingEvent={false}
+          title={newEventData?.title}
+          startTime={180}
+          eventLength={240}
+        />
+      )}
     </div>
   );
 };
 
 const areEqual = (prevProps: GridColumnProps, nextProps: GridColumnProps) => {
   return (
-    prevProps.tileIsOpen === nextProps.tileIsOpen &&
+    prevProps.newEvent === nextProps.newEvent &&
     prevProps.columnId === nextProps.columnId
   );
 };

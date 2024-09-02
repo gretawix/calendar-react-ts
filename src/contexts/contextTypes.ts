@@ -1,4 +1,4 @@
-import { createDay, getCurrentWeek } from '../utils/timeCalculations';
+import type { OneWeekDay, SingleEvent } from '../types/main';
 
 export type initNewEventFn = (
   event: React.MouseEvent,
@@ -14,9 +14,9 @@ export type ModalContextType = {
 
 export type DateContextType = {
   baseDay: Date;
-  week: ReturnType<typeof getCurrentWeek>;
+  week: OneWeekDay[];
   hoursList: string[];
-  today: ReturnType<typeof createDay>;
+  today: OneWeekDay;
   timeZone: string;
 };
 
@@ -26,6 +26,7 @@ export type EventsContextType = {
   initNewEvent: initNewEventFn;
   saveEvent: () => void;
   cancelEventCreation: () => void;
-  eventTileRef: React.RefObject<HTMLDivElement>;
+  newEventTileRef: React.RefObject<HTMLDivElement>;
   clickedEvent: React.MouseEvent | null;
+  newEventData: SingleEvent | null;
 };

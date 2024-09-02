@@ -7,9 +7,11 @@ import {
   useEffect,
 } from 'react';
 import { useModal } from '../hooks/useModal';
+import { positionModalX, positionModalY } from '../utils/positioning';
 
 import type { EventsContextType, initNewEventFn } from './contextTypes';
-import { positionModalX, positionModalY } from '../utils/positioning';
+import type { SingleEvent } from '../types/main';
+import { constructNewEvent } from '../utils/events';
 
 export const EventsContext = createContext<EventsContextType | undefined>(
   undefined
@@ -22,15 +24,19 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
   const [clickedEvent, setClickedEvent] = useState<React.MouseEvent | null>(
     null
   );
+
+  const [newEventData, setNewEventData] = useState<SingleEvent | null>(null);
   const { openModal, closeModal, modalRef, isModalOpen } = useModal();
 
-  const eventTileRef = useRef(null);
+  const newEventTileRef = useRef(null);
 
   const initNewEvent: initNewEventFn = useCallback(
     (event, columnId) => {
       openModal(event);
       setActiveTileColId(columnId);
       setClickedEvent(event);
+      const newEvent = constructNewEvent(event);
+      setNewEventData(newEvent);
     },
     [openModal]
   );
@@ -52,18 +58,19 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
     }
   }, [isModalOpen, clickedEvent, modalRef]);
 
-  const contextValue = {
-    activeTileColId,
-    setActiveTileColId,
-    initNewEvent,
-    saveEvent,
-    cancelEventCreation,
-    eventTileRef,
-    clickedEvent,
-  };
-
   return (
-    <EventsContext.Provider value={contextValue}>
+    <EventsContext.Provider
+      value={{
+        activeTileColId,
+        setActiveTileColId,
+        initNewEvent,
+        saveEvent,
+        cancelEventCreation,
+        newEventTileRef,
+        clickedEvent,
+        newEventData,
+      }}
+    >
       {children}
     </EventsContext.Provider>
   );
