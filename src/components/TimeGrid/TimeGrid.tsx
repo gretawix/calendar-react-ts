@@ -3,7 +3,6 @@ import GridColumn from '../GridColumn/GridColumn';
 import { useScroll } from '../../hooks/useScroll';
 import { useDate } from '../../hooks/useDate';
 import { useEvents } from '../../hooks/useEvents';
-import { useModal } from '../../hooks/useModal';
 
 import type { ScrollRef } from '../../types/main';
 
@@ -18,16 +17,9 @@ const TimeGrid = forwardRef<HTMLDivElement, TimeGridProps>(function TimeGrid(
   ref
 ) {
   const { week, hoursList } = useDate();
-  const { activeTileColId, setActiveTileColId } = useEvents();
-  const { openModal } = useModal();
+  const { activeTileColId, handleColumnClick } = useEvents();
 
   const hourColRef = useRef<HTMLDivElement>(null);
-
-  const handleColumnClick = useCallback((columnId: string) => {
-    openModal();
-    setActiveTileColId(columnId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const { handleVerticalScroll } = useScroll();
   const handleGridScroll = useCallback(() => {

@@ -17,4 +17,5 @@ export type DateContextType = {
 export type EventsContextType = {
   activeTileColId: string | null;
   setActiveTileColId: (id: string | null) => void;
+  handleColumnClick: (columnId: string) => void;
 };
