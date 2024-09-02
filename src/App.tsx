@@ -7,17 +7,15 @@ import Modal from './components/Modal/Modal';
 import { useModal } from './hooks/useModal';
 
 import './App.scss';
-import { useDate } from './hooks/useDate';
 
 function App() {
   const [activeTileColId, setActiveTileColId] = useState<string | null>(null);
-  const { week, hoursList, today, timeZone } = useDate();
+  const { isModalOpen, openModal } = useModal();
 
   const weekDaysRowRef = useRef<HTMLDivElement>(null);
   const timeGridRef = useRef<HTMLDivElement>(null);
 
   const { handleHorizontalScroll } = useScroll();
-  const { isModalOpen, openModal, closeModal } = useModal();
 
   const onWeekDaysScroll = useCallback(() => {
     handleHorizontalScroll(weekDaysRowRef, timeGridRef);
@@ -38,29 +36,14 @@ function App() {
   return (
     <div className="calendar">
       <div className="week-view" id="week-view">
-        <WeekDaysRow
-          today={today}
-          timeZone={timeZone}
-          week={week}
-          onScroll={onWeekDaysScroll}
-          ref={weekDaysRowRef}
-        />
+        <WeekDaysRow onScroll={onWeekDaysScroll} ref={weekDaysRowRef} />
         <TimeGrid
-          week={week}
-          hours={hoursList}
           onHorizontalScroll={onTimeGridScroll}
           ref={timeGridRef}
           activeTileColId={activeTileColId}
           onColumnClick={handleColumnClick}
         />
-        {isModalOpen && (
-          <Modal
-            closeModal={() => {
-              closeModal();
-              setActiveTileColId(null);
-            }}
-          />
-        )}
+        {isModalOpen && <Modal />}
       </div>
     </div>
   );

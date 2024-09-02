@@ -2,22 +2,23 @@ import { forwardRef, memo, useCallback, useRef } from 'react';
 import GridColumn from '../GridColumn/GridColumn';
 import { useScroll } from '../../hooks/useScroll';
 
-import type { ScrollRef, OneWeekDay } from '../../types/main';
+import type { ScrollRef } from '../../types/main';
 
 import './timeGrid.scss';
+import { useDate } from '../../hooks/useDate';
 
 type TimeGridProps = {
-  week: OneWeekDay[];
-  hours: string[];
   activeTileColId: string | null;
   onHorizontalScroll: () => void;
   onColumnClick: (id: string) => void;
 };
 
 const TimeGrid = forwardRef<HTMLDivElement, TimeGridProps>(function TimeGrid(
-  { week, hours, activeTileColId, onHorizontalScroll, onColumnClick },
+  { activeTileColId, onHorizontalScroll, onColumnClick },
   ref
 ) {
+  const { week, hoursList } = useDate();
+
   const hourColRef = useRef<HTMLDivElement>(null);
 
   const { handleVerticalScroll } = useScroll();
@@ -35,7 +36,7 @@ const TimeGrid = forwardRef<HTMLDivElement, TimeGridProps>(function TimeGrid(
         ref={hourColRef}
         onScroll={() => handleVerticalScroll(hourColRef, ref as ScrollRef)}
       >
-        {hours.map((hour) => (
+        {hoursList.map((hour) => (
           <div key={hour} className="hour-label-cell cell-height">
             <p className="hour">{hour}</p>
           </div>
@@ -48,7 +49,7 @@ const TimeGrid = forwardRef<HTMLDivElement, TimeGridProps>(function TimeGrid(
         onScroll={handleGridScroll}
       >
         <div className="divider-column">
-          {hours.map((hour) => (
+          {hoursList.map((hour) => (
             <div key={hour} className="divider cell-height"></div>
           ))}
         </div>

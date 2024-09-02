@@ -1,19 +1,17 @@
 import WeekDay from '../WeekDay/WeekDay';
 import { forwardRef, memo } from 'react';
 
-import type { OneWeekDay } from '../../types/main';
-
 import './weekDayRow.scss';
+import { useDate } from '../../hooks/useDate';
 
 type WeekDaysRowProps = {
-  today: OneWeekDay;
-  timeZone: string;
-  week: OneWeekDay[];
   onScroll: () => void;
 };
 
 const WeekDaysRow = forwardRef<HTMLDivElement, WeekDaysRowProps>(
-  function WeekDaysRow({ today, timeZone, week, onScroll }, ref) {
+  function WeekDaysRow({ onScroll }, ref) {
+    const { today, timeZone, week } = useDate();
+
     return (
       <div className="week-days-part">
         <div className="time-zone-cell">

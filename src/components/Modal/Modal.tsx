@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { memo } from 'react';
 import Button from '../Button/Button';
 import TopControls from './subComponents/TopControls/TopControls';
 import ControlButtons from './subComponents/ControlButtons/ControlButtons';
@@ -7,19 +7,10 @@ import EventSettings from './subComponents/EventSettings/EventSettings';
 
 import './modal.scss';
 
-type ModalProps = {
-  closeModal: () => void;
-};
-
-const Modal = ({ closeModal }: ModalProps) => {
-  const saveEvent = useCallback(() => {
-    closeModal();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
+const Modal = () => {
   return (
     <div className="event-modal" id="event-modal">
-      <TopControls onCloseModal={closeModal} />
+      <TopControls />
       <div className="event-content">
         <EventTitle />
         <div className="event-settings">
@@ -30,7 +21,7 @@ const Modal = ({ closeModal }: ModalProps) => {
           </div>
           <EventSettings />
         </div>
-        <ControlButtons onSaveClick={saveEvent} />
+        <ControlButtons />
       </div>
     </div>
   );

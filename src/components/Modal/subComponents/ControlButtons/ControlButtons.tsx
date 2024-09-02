@@ -1,15 +1,21 @@
-import { memo } from 'react';
+import { memo, useCallback } from 'react';
 import Button from '../../../Button/Button';
-
-import './controlButtons.scss';
+import { useModal } from '../../../../hooks/useModal';
 import useKeyDown from '../../../../hooks/useKeyDown';
 
-type ControlButtonsProps = {
-  onSaveClick: () => void;
-};
+import './controlButtons.scss';
 
-const ControlButtons = ({ onSaveClick }: ControlButtonsProps) => {
-  useKeyDown('Enter', onSaveClick);
+const ControlButtons = () => {
+  const { closeModal } = useModal();
+
+  const saveEvent = useCallback(() => {
+    closeModal();
+    //handleactive column and event tile
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useKeyDown('Enter', saveEvent);
 
   return (
     <div className="event-control-buttons">
@@ -18,7 +24,7 @@ const ControlButtons = ({ onSaveClick }: ControlButtonsProps) => {
         title="Save"
         styleType="cta"
         id="save-event-btn"
-        onClick={onSaveClick}
+        onClick={saveEvent}
       />
     </div>
   );
