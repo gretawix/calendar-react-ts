@@ -1,10 +1,11 @@
 import { memo } from 'react';
 import Tile from '../Tile/Tile';
 
+import type { ShowNewEventTileFn } from '../../contexts/contextTypes';
 import './gridColumn.scss';
 
 type GridColumnProps = {
-  onClick: () => void;
+  onClick: ShowNewEventTileFn;
   columnId: string;
   tileIsOpen: boolean;
 };
@@ -15,7 +16,11 @@ const GridColumn: React.FC<GridColumnProps> = ({
   onClick,
 }) => {
   return (
-    <div className="hours-cells-column" onClick={onClick} id={columnId}>
+    <div
+      className="hours-cells-column"
+      onClick={(event) => onClick(event, columnId)}
+      id={columnId}
+    >
       {tileIsOpen && <Tile />}
     </div>
   );

@@ -2,7 +2,7 @@ import { createContext, useState, ReactNode } from 'react';
 import { useModal } from '../hooks/useModal';
 import useKeyDown from '../hooks/useKeyDown';
 
-import type { EventsContextType } from './contextTypes';
+import type { EventsContextType, ShowNewEventTileFn } from './contextTypes';
 
 export const EventsContext = createContext<EventsContextType | undefined>(
   undefined
@@ -15,7 +15,9 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
 
   const { openModal, closeModal } = useModal();
 
-  const showNewEventTile = (columnId: string) => {
+  const showNewEventTile: ShowNewEventTileFn = (event, columnId) => {
+    //todo : handle modal opening position
+    console.log(event.clientY);
     openModal();
     setActiveTileColId(columnId);
   };

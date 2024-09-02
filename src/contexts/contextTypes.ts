@@ -1,5 +1,10 @@
 import { createDay, getCurrentWeek } from '../utils/timeCalculations';
 
+export type ShowNewEventTileFn = (
+  event: React.MouseEvent,
+  columnId: string
+) => void;
+
 export type ModalContextType = {
   isModalOpen: boolean;
   openModal: () => void;
@@ -17,7 +22,7 @@ export type DateContextType = {
 export type EventsContextType = {
   activeTileColId: string | null;
   setActiveTileColId: (id: string | null) => void;
-  showNewEventTile: (columnId: string) => void;
+  showNewEventTile: ShowNewEventTileFn;
   saveEvent: () => void;
   cancelEventCreation: () => void;
 };
