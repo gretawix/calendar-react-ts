@@ -1,7 +1,8 @@
-import { createContext, useState, ReactNode, useCallback } from 'react';
+import { createContext, useState, ReactNode } from 'react';
+import { useModal } from '../hooks/useModal';
+import useKeyDown from '../hooks/useKeyDown';
 
 import type { EventsContextType } from './contextTypes';
-import { useModal } from '../hooks/useModal';
 
 export const EventsContext = createContext<EventsContextType | undefined>(
   undefined
@@ -12,17 +13,36 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
 }) => {
   const [activeTileColId, setActiveTileColId] = useState<string | null>(null);
 
-  const { openModal } = useModal();
+  const { openModal, closeModal } = useModal();
 
-  const handleColumnClick = useCallback((columnId: string) => {
+  const showNewEventTile = (columnId: string) => {
     openModal();
     setActiveTileColId(columnId);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  };
+
+  const saveEvent = () => {
+    closeModal();
+    setActiveTileColId(null);
+  };
+
+  useKeyDown('Enter', saveEvent);
+
+  const cancelEventCreation = () => {
+    closeModal();
+    setActiveTileColId(null);
+  };
+
+  useKeyDown('Escape', cancelEventCreation);
 
   return (
     <EventsContext.Provider
-      value={{ activeTileColId, setActiveTileColId, handleColumnClick }}
+      value={{
+        activeTileColId,
+        setActiveTileColId,
+        showNewEventTile,
+        saveEvent,
+        cancelEventCreation,
+      }}
     >
       {children}
     </EventsContext.Provider>

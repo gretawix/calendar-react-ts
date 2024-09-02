@@ -1,21 +1,18 @@
 import { memo } from 'react';
-import useKeyDown from '../../../../hooks/useKeyDown';
 import MaterialSymbol from '../../../MaterialIcon/MaterialIcon';
-import { useModal } from '../../../../hooks/useModal';
+import { useEvents } from '../../../../hooks/useEvents';
 
 import './topControls.scss';
 
 const TopControls = () => {
-  const { closeModal } = useModal();
-
-  useKeyDown('Escape', closeModal);
+  const { cancelEventCreation } = useEvents();
 
   return (
     <div className="top-controls">
       <button type="button">
         <MaterialSymbol iconName="drag_handle" />
       </button>
-      <button type="button" onClick={closeModal}>
+      <button type="button" onClick={cancelEventCreation}>
         <MaterialSymbol iconName="close" />
       </button>
     </div>

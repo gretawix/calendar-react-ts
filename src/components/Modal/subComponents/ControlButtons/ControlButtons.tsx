@@ -1,21 +1,11 @@
-import { memo, useCallback } from 'react';
+import { memo } from 'react';
 import Button from '../../../Button/Button';
-import { useModal } from '../../../../hooks/useModal';
-import useKeyDown from '../../../../hooks/useKeyDown';
+import { useEvents } from '../../../../hooks/useEvents';
 
 import './controlButtons.scss';
 
 const ControlButtons = () => {
-  const { closeModal } = useModal();
-
-  const saveEvent = useCallback(() => {
-    closeModal();
-    //handleactive column and event tile
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  useKeyDown('Enter', saveEvent);
+  const { saveEvent } = useEvents();
 
   return (
     <div className="event-control-buttons">

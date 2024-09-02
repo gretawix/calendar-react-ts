@@ -1,4 +1,4 @@
-import { memo, useCallback, useRef } from 'react';
+import { memo, useRef } from 'react';
 import WeekDaysRow from './components/WeekDaysRow/WeekDayRow';
 
 import TimeGrid from './components/TimeGrid/TimeGrid';
@@ -16,15 +16,13 @@ function App() {
 
   const { handleHorizontalScroll } = useScroll();
 
-  const onWeekDaysScroll = useCallback(() => {
+  const onWeekDaysScroll = () => {
     handleHorizontalScroll(weekDaysRowRef, timeGridRef);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  };
 
-  const onTimeGridScroll = useCallback(() => {
+  const onTimeGridScroll = () => {
     handleHorizontalScroll(timeGridRef, weekDaysRowRef);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  };
 
   return (
     <div className="calendar">

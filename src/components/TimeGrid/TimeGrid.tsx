@@ -1,4 +1,4 @@
-import { forwardRef, memo, useCallback, useRef } from 'react';
+import { forwardRef, memo, useRef } from 'react';
 import GridColumn from '../GridColumn/GridColumn';
 import { useScroll } from '../../hooks/useScroll';
 import { useDate } from '../../hooks/useDate';
@@ -17,16 +17,15 @@ const TimeGrid = forwardRef<HTMLDivElement, TimeGridProps>(function TimeGrid(
   ref
 ) {
   const { week, hoursList } = useDate();
-  const { activeTileColId, handleColumnClick } = useEvents();
+  const { activeTileColId, showNewEventTile } = useEvents();
 
   const hourColRef = useRef<HTMLDivElement>(null);
 
   const { handleVerticalScroll } = useScroll();
-  const handleGridScroll = useCallback(() => {
+  const handleGridScroll = () => {
     handleVerticalScroll(ref as ScrollRef, hourColRef);
     onHorizontalScroll();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  };
 
   return (
     <div className="time-grid">
@@ -57,7 +56,7 @@ const TimeGrid = forwardRef<HTMLDivElement, TimeGridProps>(function TimeGrid(
           <GridColumn
             key={oneDay.id}
             columnId={oneDay.id}
-            onClick={() => handleColumnClick(oneDay.id)}
+            onClick={() => showNewEventTile(oneDay.id)}
             tileIsOpen={oneDay.id === activeTileColId}
           />
         ))}
