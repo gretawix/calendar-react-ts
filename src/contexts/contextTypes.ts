@@ -9,7 +9,7 @@ export type ModalContextType = {
   isModalOpen: boolean;
   openModal: (event: React.MouseEvent) => void;
   closeModal: () => void;
-  modalRef: React.MutableRefObject<HTMLDivElement | null>;
+  modalRef: React.RefObject<HTMLDivElement>;
 };
 
 export type DateContextType = {
