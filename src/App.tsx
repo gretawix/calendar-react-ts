@@ -1,27 +1,17 @@
-import { memo, useCallback, useMemo, useRef, useState } from 'react';
+import { memo, useCallback, useRef, useState } from 'react';
 import WeekDaysRow from './components/WeekDaysRow/WeekDayRow';
-import {
-  createDay,
-  createHoursList,
-  getCurrentWeek,
-  getTimeZone,
-} from './utils/timeCalculations';
+
 import TimeGrid from './components/TimeGrid/TimeGrid';
 import { useScroll } from './hooks/useScroll';
 import Modal from './components/Modal/Modal';
 import { useModal } from './hooks/useModal';
 
 import './App.scss';
+import { useDate } from './hooks/useDate';
 
 function App() {
-  // const [isModalOpen, setIsModalOpen] = useState(false);
   const [activeTileColId, setActiveTileColId] = useState<string | null>(null);
-  const [baseDay] = useState(new Date());
-
-  const week = useMemo(() => getCurrentWeek(baseDay), [baseDay]);
-  const hoursList = useMemo(() => createHoursList(), []);
-  const today = useMemo(() => createDay(new Date()), []);
-  const timeZone = useMemo(() => getTimeZone(new Date()), []);
+  const { week, hoursList, today, timeZone } = useDate();
 
   const weekDaysRowRef = useRef<HTMLDivElement>(null);
   const timeGridRef = useRef<HTMLDivElement>(null);
