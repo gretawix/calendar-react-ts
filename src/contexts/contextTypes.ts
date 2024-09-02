@@ -7,8 +7,9 @@ export type ShowNewEventTileFn = (
 
 export type ModalContextType = {
   isModalOpen: boolean;
-  openModal: () => void;
+  openModal: (event: React.MouseEvent) => void;
   closeModal: () => void;
+  modalRef: React.MutableRefObject<HTMLDivElement | null>;
 };
 
 export type DateContextType = {

@@ -16,9 +16,7 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
   const { openModal, closeModal } = useModal();
 
   const showNewEventTile: ShowNewEventTileFn = (event, columnId) => {
-    //todo : handle modal opening position
-    console.log(event.clientY);
-    openModal();
+    openModal(event);
     setActiveTileColId(columnId);
   };
 

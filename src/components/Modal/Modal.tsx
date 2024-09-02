@@ -6,10 +6,13 @@ import EventTitle from './subComponents/EventTitle/EventTitle';
 import EventSettings from './subComponents/EventSettings/EventSettings';
 
 import './modal.scss';
+import { useModal } from '../../hooks/useModal';
 
 const Modal = () => {
+  const { modalRef } = useModal();
+
   return (
-    <div className="event-modal" id="event-modal">
+    <div className="event-modal" id="event-modal" ref={modalRef}>
       <TopControls />
       <div className="event-content">
         <EventTitle />
