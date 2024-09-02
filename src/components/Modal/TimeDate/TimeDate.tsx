@@ -1,10 +1,11 @@
 import { memo, useState } from 'react';
 import Button from '../../Button/Button';
 import Dropdown from '../../Dropdown/Dropdown';
+import ModalIcon from '../ModalIcon/ModalIcon';
+
+import type { IconName } from '../../../types/main';
 
 import './timeDate.scss';
-import { IconName } from '../../../types/main';
-import ModalIcon from '../ModalIcon/ModalIcon';
 
 const TimeDate = () => {
   const [isOpen, setIsOpen] = useState(false);

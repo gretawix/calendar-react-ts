@@ -1,25 +1,33 @@
 import { forwardRef, memo, useCallback, useRef } from 'react';
 import GridColumn from '../GridColumn/GridColumn';
 import { useScroll } from '../../hooks/useScroll';
+import { useDate } from '../../hooks/useDate';
+import { useEvents } from '../../hooks/useEvents';
+import { useModal } from '../../hooks/useModal';
 
 import type { ScrollRef } from '../../types/main';
 
 import './timeGrid.scss';
-import { useDate } from '../../hooks/useDate';
 
 type TimeGridProps = {
-  activeTileColId: string | null;
   onHorizontalScroll: () => void;
-  onColumnClick: (id: string) => void;
 };
 
 const TimeGrid = forwardRef<HTMLDivElement, TimeGridProps>(function TimeGrid(
-  { activeTileColId, onHorizontalScroll, onColumnClick },
+  { onHorizontalScroll },
   ref
 ) {
   const { week, hoursList } = useDate();
+  const { activeTileColId, setActiveTileColId } = useEvents();
+  const { openModal } = useModal();
 
   const hourColRef = useRef<HTMLDivElement>(null);
+
+  const handleColumnClick = useCallback((columnId: string) => {
+    openModal();
+    setActiveTileColId(columnId);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const { handleVerticalScroll } = useScroll();
   const handleGridScroll = useCallback(() => {
@@ -57,7 +65,7 @@ const TimeGrid = forwardRef<HTMLDivElement, TimeGridProps>(function TimeGrid(
           <GridColumn
             key={oneDay.id}
             columnId={oneDay.id}
-            onClick={() => onColumnClick(oneDay.id)}
+            onClick={() => handleColumnClick(oneDay.id)}
             tileIsOpen={oneDay.id === activeTileColId}
           />
         ))}

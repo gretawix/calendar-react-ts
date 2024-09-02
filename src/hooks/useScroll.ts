@@ -1,4 +1,4 @@
-import { ScrollRef } from '../types/main';
+import type { ScrollRef } from '../types/main';
 
 export const useScroll = () => {
   const handleVerticalScroll = (sourceDiv: ScrollRef, targetDiv: ScrollRef) => {

@@ -1,4 +1,4 @@
-import { OneWeekDay } from '../types/main';
+import type { OneWeekDay } from '../types/main';
 
 const daysInWeek = 7;
 const hoursInDay = 24;

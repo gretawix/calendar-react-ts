@@ -6,7 +6,7 @@ import {
   getTimeZone,
 } from '../utils/timeCalculations';
 
-import { DateContextType } from './contextTypes';
+import type { DateContextType } from './contextTypes';
 
 export const DateContext = createContext<DateContextType | undefined>(
   undefined

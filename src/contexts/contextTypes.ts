@@ -13,3 +13,8 @@ export type DateContextType = {
   today: ReturnType<typeof createDay>;
   timeZone: string;
 };
+
+export type EventsContextType = {
+  activeTileColId: string | null;
+  setActiveTileColId: (id: string | null) => void;
+};
