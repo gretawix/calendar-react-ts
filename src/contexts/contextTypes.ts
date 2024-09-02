@@ -1,6 +1,6 @@
 import { createDay, getCurrentWeek } from '../utils/timeCalculations';
 
-export type ShowNewEventTileFn = (
+export type initNewEventFn = (
   event: React.MouseEvent,
   columnId: string
 ) => void;
@@ -23,7 +23,7 @@ export type DateContextType = {
 export type EventsContextType = {
   activeTileColId: string | null;
   setActiveTileColId: (id: string | null) => void;
-  showNewEventTile: ShowNewEventTileFn;
+  initNewEvent: initNewEventFn;
   saveEvent: () => void;
   cancelEventCreation: () => void;
   eventTileRef: React.RefObject<HTMLDivElement>;

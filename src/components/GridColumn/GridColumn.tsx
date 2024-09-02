@@ -1,11 +1,11 @@
 import { memo } from 'react';
 import EventTile from '../Tile/EventTile';
 
-import type { ShowNewEventTileFn } from '../../contexts/contextTypes';
+import type { initNewEventFn } from '../../contexts/contextTypes';
 import './gridColumn.scss';
 
 type GridColumnProps = {
-  onClick: ShowNewEventTileFn;
+  onClick: initNewEventFn;
   columnId: string;
   tileIsOpen: boolean;
 };

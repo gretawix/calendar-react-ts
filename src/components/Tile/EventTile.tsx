@@ -5,9 +5,13 @@ import './eventTile.scss';
 
 type TyleProps = {
   existingEvent?: boolean;
+  title: string;
 };
 
-const EventTile = ({ existingEvent = false }: TyleProps) => {
+const EventTile = ({
+  existingEvent = false,
+  title = '(no title)',
+}: TyleProps) => {
   const { eventTileRef } = useEvents();
 
   return (
@@ -15,7 +19,7 @@ const EventTile = ({ existingEvent = false }: TyleProps) => {
       ref={eventTileRef}
       className={`event-tile regular ${!existingEvent ? 'placeholder' : ''}`}
     >
-      <p className="event-tile-title">(no title)</p>
+      <p className="event-tile-title">{title}</p>
       <p className="event-tile-time">08:30 - 09:30</p>
     </div>
   );

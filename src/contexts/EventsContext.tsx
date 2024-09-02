@@ -7,9 +7,8 @@ import {
   useEffect,
 } from 'react';
 import { useModal } from '../hooks/useModal';
-import useKeyDown from '../hooks/useKeyDown';
 
-import type { EventsContextType, ShowNewEventTileFn } from './contextTypes';
+import type { EventsContextType, initNewEventFn } from './contextTypes';
 import { positionModalX, positionModalY } from '../utils/positioning';
 
 export const EventsContext = createContext<EventsContextType | undefined>(
@@ -27,7 +26,7 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
 
   const eventTileRef = useRef(null);
 
-  const showNewEventTile: ShowNewEventTileFn = useCallback(
+  const initNewEvent: initNewEventFn = useCallback(
     (event, columnId) => {
       openModal(event);
       setActiveTileColId(columnId);
@@ -41,14 +40,10 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
     setActiveTileColId(null);
   }, [closeModal]);
 
-  useKeyDown('Enter', saveEvent);
-
   const cancelEventCreation = useCallback(() => {
     closeModal();
     setActiveTileColId(null);
   }, [closeModal]);
-
-  useKeyDown('Escape', cancelEventCreation);
 
   useEffect(() => {
     if (isModalOpen && clickedEvent && modalRef.current) {
@@ -57,18 +52,18 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
     }
   }, [isModalOpen, clickedEvent, modalRef]);
 
+  const contextValue = {
+    activeTileColId,
+    setActiveTileColId,
+    initNewEvent,
+    saveEvent,
+    cancelEventCreation,
+    eventTileRef,
+    clickedEvent,
+  };
+
   return (
-    <EventsContext.Provider
-      value={{
-        activeTileColId,
-        setActiveTileColId,
-        showNewEventTile,
-        saveEvent,
-        cancelEventCreation,
-        eventTileRef,
-        clickedEvent,
-      }}
-    >
+    <EventsContext.Provider value={contextValue}>
       {children}
     </EventsContext.Provider>
   );
