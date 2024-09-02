@@ -10,11 +10,11 @@ import './styles/inputs.scss';
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <ModalProvider>
-      <DateProvider>
-        <EventsProvider>
+      <EventsProvider>
+        <DateProvider>
           <App />
-        </EventsProvider>
-      </DateProvider>
+        </DateProvider>
+      </EventsProvider>
     </ModalProvider>
   </StrictMode>
 );

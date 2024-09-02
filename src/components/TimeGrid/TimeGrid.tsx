@@ -19,7 +19,7 @@ const TimeGrid = forwardRef<HTMLDivElement, TimeGridProps>(function TimeGrid(
   const { week, hoursList } = useDate();
   const { activeTileColId, showNewEventTile } = useEvents();
 
-  const hourColRef = useRef<HTMLDivElement>(null);
+  const hourColRef = useRef(null);
 
   const { handleVerticalScroll } = useScroll();
   const handleGridScroll = () => {

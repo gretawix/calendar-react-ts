@@ -1,14 +1,18 @@
 import { memo } from 'react';
+import { useEvents } from '../../hooks/useEvents';
 
-import './tile.scss';
+import './eventTile.scss';
 
 type TyleProps = {
   existingEvent?: boolean;
 };
 
-const Tile = ({ existingEvent = false }: TyleProps) => {
+const EventTile = ({ existingEvent = false }: TyleProps) => {
+  const { eventTileRef } = useEvents();
+
   return (
     <div
+      ref={eventTileRef}
       className={`event-tile regular ${!existingEvent ? 'placeholder' : ''}`}
     >
       <p className="event-tile-title">(no title)</p>
@@ -17,4 +21,4 @@ const Tile = ({ existingEvent = false }: TyleProps) => {
   );
 };
 
-export default memo(Tile);
+export default memo(EventTile);

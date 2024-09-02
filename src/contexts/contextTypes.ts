@@ -26,4 +26,6 @@ export type EventsContextType = {
   showNewEventTile: ShowNewEventTileFn;
   saveEvent: () => void;
   cancelEventCreation: () => void;
+  eventTileRef: React.RefObject<HTMLDivElement>;
+  clickedEvent: React.MouseEvent | null;
 };

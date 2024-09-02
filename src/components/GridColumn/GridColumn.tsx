@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import Tile from '../Tile/Tile';
+import EventTile from '../Tile/EventTile';
 
 import type { ShowNewEventTileFn } from '../../contexts/contextTypes';
 import './gridColumn.scss';
@@ -21,7 +21,7 @@ const GridColumn: React.FC<GridColumnProps> = ({
       onClick={(event) => onClick(event, columnId)}
       id={columnId}
     >
-      {tileIsOpen && <Tile />}
+      {tileIsOpen && <EventTile />}
     </div>
   );
 };
