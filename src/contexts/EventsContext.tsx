@@ -29,8 +29,9 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
   const { openModal, closeModal, modalRef, isModalOpen } = useModal();
 
   const eventTarget = clickedEvent?.target;
-  const activeTileColId =
-    eventTarget instanceof HTMLElement ? eventTarget.id : '';
+  const [activeTileColId, setActiveTileColId] = useState(
+    eventTarget instanceof HTMLElement ? eventTarget.id : ''
+  );
 
   const newEventTileRef = useRef(null);
 
@@ -41,6 +42,7 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
       if (event.target instanceof HTMLElement) {
         const updatedEventData = constructNewEvent(event, event.target.id);
         setNewEventData(updatedEventData);
+        setActiveTileColId(event.target.id);
       }
     },
     [openModal]
@@ -50,6 +52,7 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
     closeModal();
     setNewEventData(defaultEvent);
     setClickedEvent(null);
+    setActiveTileColId('');
   }, [closeModal]);
 
   const saveEvent = useCallback(() => {
@@ -68,6 +71,8 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
     <EventsContext.Provider
       value={{
         activeTileColId,
+        setNewEventData,
+        setActiveTileColId,
         initNewEvent,
         saveEvent,
         cancelEventCreation,

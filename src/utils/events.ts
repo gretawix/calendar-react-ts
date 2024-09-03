@@ -2,11 +2,20 @@ import {
   cellHeightInPx,
   defaultEventLengthInMinutes,
 } from '../contants/constants';
-import { MONTHS, WEEK_DAYS } from '../types/constants';
+import {
+  MONTHS,
+  WEEK_DAYS,
+  SHORT_MONTHS_NAMES,
+  SHORT_WEEKDAY_NAMES,
+} from '../types/constants';
 import { getTilePositionFromClick } from './positioning';
 import { constructBasicDay } from './timeCalculations';
 
-import type { SingleEvent } from '../types/main';
+import type {
+  MonthNamesLong,
+  SingleEvent,
+  WeekDayNamesLong,
+} from '../types/main';
 
 export const getDefaultEvent = (): SingleEvent => {
   const today = new Date();
@@ -43,5 +52,21 @@ export const constructNewEvent = (
     monthLong: MONTHS[day.month],
     startTimeInMinutes: startTime,
     eventLengthInMinutes: defaultEventLengthInMinutes,
+  };
+};
+
+export const updateEventDate = (
+  currentEventData: SingleEvent,
+  weekDayLong: WeekDayNamesLong,
+  monthLong: MonthNamesLong,
+  day: number
+) => {
+  return {
+    ...currentEventData,
+    weekDayLong,
+    monthLong,
+    day,
+    weekDay: SHORT_WEEKDAY_NAMES[weekDayLong],
+    month: SHORT_MONTHS_NAMES[monthLong],
   };
 };

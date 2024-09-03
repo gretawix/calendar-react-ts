@@ -1,14 +1,17 @@
-import { memo, useState } from 'react';
+import { memo, useCallback, useEffect, useState } from 'react';
 import Button from '../../Button/Button';
 import Dropdown from '../../Dropdown/Dropdown';
 import ModalIcon from '../ModalIcon/ModalIcon';
+import TextInput from '../../inputs/TextInput';
+import { useEvents } from '../../../hooks/useEvents';
+import { getDate, getTime } from '../../../utils/timeCalculations';
+import { updateEventDate } from '../../../utils/events';
 
 import type { IconName, RefObjectMap } from '../../../types/main';
 
 import './timeDate.scss';
-import TextInput from '../../inputs/TextInput';
-import { useEvents } from '../../../hooks/useEvents';
-import { getTime } from '../../../utils/timeCalculations';
+import { useDate } from '../../../hooks/useDate';
+import { SHORT_MONTHS_NAMES } from '../../../types/constants';
 
 type TimeDateProps = {
   dateTimeInputRefs: RefObjectMap<'date' | 'startTime' | 'endTime'>;
@@ -16,13 +19,37 @@ type TimeDateProps = {
 
 const TimeDate = ({ dateTimeInputRefs }: TimeDateProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { newEventData } = useEvents();
+  const { newEventData, setNewEventData, setActiveTileColId } = useEvents();
+  const { week } = useDate();
 
   const date = `${newEventData.weekDayLong}, ${newEventData.monthLong} ${newEventData.day}`;
   const startTime = getTime(newEventData.startTimeInMinutes);
   const endTime = getTime(
     newEventData.startTimeInMinutes + newEventData.eventLengthInMinutes
   );
+
+  const setNewDate = useCallback(() => {
+    setNewEventData((prevEventData) => {
+      const newDate = dateTimeInputRefs?.date?.current?.value || '';
+      const newDateObj = getDate(newDate);
+      const targetWeekDay = week.find(
+        (oneday) =>
+          oneday.day === newDateObj.day &&
+          oneday.month === SHORT_MONTHS_NAMES[newDateObj.monthLong]
+      );
+
+      if (targetWeekDay) {
+        setActiveTileColId(targetWeekDay.id);
+      }
+
+      return updateEventDate(
+        prevEventData,
+        newDateObj.weekDayLong,
+        newDateObj.monthLong,
+        newDateObj.day
+      );
+    });
+  }, [dateTimeInputRefs?.date, setActiveTileColId, setNewEventData, week]);
 
   const iconName: IconName = 'schedule';
   const previewClasses = `${iconName ? 'has-icon ' : 'no-icon'} ${!isOpen ? 'preview-setting' : ''}  modal-event-side-margins`;
@@ -35,6 +62,10 @@ const TimeDate = ({ dateTimeInputRefs }: TimeDateProps) => {
     'Every weekday (Monday to Friday)',
     'Custom...',
   ];
+
+  useEffect(() => {
+    console.log(date);
+  }, [date]);
 
   if (!isOpen) {
     return (
@@ -62,6 +93,7 @@ const TimeDate = ({ dateTimeInputRefs }: TimeDateProps) => {
       </div>
     );
   }
+
   return (
     <div className="full-settings">
       <div className={previewClasses}>
@@ -69,19 +101,20 @@ const TimeDate = ({ dateTimeInputRefs }: TimeDateProps) => {
         <div className="settings-inner time-date-settings">
           <div className="time-date-inputs-wrapper">
             <TextInput
-              value={date}
+              defaultValue={date}
               ref={dateTimeInputRefs.date}
               id="date"
               style={{ width: 170 }}
+              onBlur={setNewDate}
             />
             <TextInput
-              value={startTime}
+              defaultValue={startTime}
               ref={dateTimeInputRefs.startTime}
               id="time-start"
               style={{ width: 52 }}
             />
             <TextInput
-              value={endTime}
+              defaultValue={endTime}
               ref={dateTimeInputRefs.endTime}
               id="time-end"
               style={{ width: 52 }}

@@ -1,13 +1,13 @@
 import { forwardRef, memo } from 'react';
 
 type TextInputProps = {
-  value: string;
+  defaultValue: string;
   id: string;
   className?: string;
 } & React.InputHTMLAttributes<HTMLInputElement>;
 
 const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
-  ({ value, id, className, ...rest }, ref) => {
+  ({ defaultValue, id, className, ...rest }, ref) => {
     return (
       <label htmlFor={id}>
         <input
@@ -15,7 +15,7 @@ const TextInput = forwardRef<HTMLInputElement, TextInputProps>(
           id={id}
           name={id}
           className={`standard-input ${className}`}
-          value={value}
+          defaultValue={defaultValue}
           ref={ref}
           {...rest}
         />

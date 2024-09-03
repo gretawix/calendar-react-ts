@@ -18,6 +18,8 @@ export type DateContextType = {
 };
 
 export type EventsContextType = {
+  setNewEventData: React.Dispatch<React.SetStateAction<SingleEvent>>;
+  setActiveTileColId: React.Dispatch<React.SetStateAction<string>>;
   activeTileColId: string;
   initNewEvent: initNewEventFn;
   saveEvent: () => void;

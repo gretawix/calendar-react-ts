@@ -76,6 +76,37 @@ const MONTHS: Record<keyof typeof MONTHS_SHORT, keyof typeof MONTHS_LONG> = {
   Dec: 'December',
 };
 
+const SHORT_WEEKDAY_NAMES: Record<
+  keyof typeof WEEK_DAYS_LONG,
+  keyof typeof WEEK_DAYS_SHORT
+> = {
+  Monday: 'Mon',
+  Tuesday: 'Tue',
+  Wednesday: 'Wed',
+  Thursday: 'Thu',
+  Friday: 'Fri',
+  Saturday: 'Sat',
+  Sunday: 'Sun',
+};
+
+const SHORT_MONTHS_NAMES: Record<
+  keyof typeof MONTHS_LONG,
+  keyof typeof MONTHS_SHORT
+> = {
+  January: 'Jan',
+  February: 'Feb',
+  March: 'Mar',
+  April: 'Apr',
+  May: 'May',
+  June: 'Jun',
+  July: 'Jul',
+  August: 'Aug',
+  September: 'Sep',
+  October: 'Oct',
+  November: 'Nov',
+  December: 'Dec',
+};
+
 export {
   WEEK_DAYS_SHORT,
   WEEK_DAYS_LONG,
@@ -83,4 +114,6 @@ export {
   MONTHS_LONG,
   WEEK_DAYS,
   MONTHS,
+  SHORT_WEEKDAY_NAMES,
+  SHORT_MONTHS_NAMES,
 };
