@@ -27,8 +27,6 @@
     font-weight: 300;
   }
   &.shortest {
-    top: calc(var(--cell-height) * 10 - 1px);
-    height: calc(var(--cell-height) / 4);
     padding-top: 0;
     padding-bottom: 0;
     display: flex;
@@ -42,8 +40,6 @@
     }
   }
   &.short {
-    top: calc(var(--cell-height) * 10 - 1px);
-    height: calc(var(--cell-height) / 2);
     padding-top: 3px;
     display: flex;
     flex-direction: row;
@@ -52,12 +48,8 @@
       padding-right: 6px;
     }
   }
-  &.regular {
-    height: calc(var(--cell-height) - 4px);
-  }
+
   &.long {
-    top: calc(var(--cell-height) * 12 - 1px);
-    height: calc(var(--cell-height) * 2 - 4px);
     .event-tile-title {
       font-weight: 500;
       white-space: unset;

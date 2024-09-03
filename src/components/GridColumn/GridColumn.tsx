@@ -28,9 +28,9 @@ const GridColumn: React.FC<GridColumnProps> = ({
         <EventTile
           ref={newEventTileRef}
           existingEvent={false}
-          title={newEventData?.title}
-          startTime={180}
-          eventLength={240}
+          title={newEventData.title}
+          startTime={newEventData.startTimeInMinutes}
+          eventLength={newEventData.eventLengthInMinutes}
         />
       )}
     </div>

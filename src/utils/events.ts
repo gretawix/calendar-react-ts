@@ -33,7 +33,7 @@ export const constructNewEvent = (event: React.MouseEvent): SingleEvent => {
   const data = getDefaultEvent();
   const startTime = getStartTimeFromClick(event);
   data.startTimeInMinutes = startTime;
-  data.eventLengthInMinutes = startTime + defaultEventLengthInMinutes;
+  data.eventLengthInMinutes = defaultEventLengthInMinutes;
 
   return data;
 };

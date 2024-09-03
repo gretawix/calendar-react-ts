@@ -48,7 +48,3 @@ export const getTilePositionFromClick = (event: React.MouseEvent) => {
 
   return Math.floor(clickPosition / increment) * increment;
 };
-
-export const getTilePositionFromMinutes = (minutes: number) => {
-  return minutes / cellHeightInPx;
-};
