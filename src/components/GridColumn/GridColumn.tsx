@@ -1,29 +1,18 @@
 import { memo } from 'react';
 import EventTile from '../Tile/EventTile';
-
-import type { initNewEventFn } from '../../contexts/contextTypes';
 import './gridColumn.scss';
 import { useEvents } from '../../hooks/useEvents';
 
 type GridColumnProps = {
-  onClick: initNewEventFn;
   columnId: string;
   newEvent: boolean;
 };
 
-const GridColumn: React.FC<GridColumnProps> = ({
-  columnId,
-  newEvent,
-  onClick,
-}) => {
-  const { newEventTileRef, newEventData } = useEvents();
+const GridColumn: React.FC<GridColumnProps> = ({ columnId, newEvent }) => {
+  const { newEventTileRef, newEventData, initNewEvent } = useEvents();
 
   return (
-    <div
-      className="hours-cells-column"
-      onClick={(event) => onClick(event, columnId)}
-      id={columnId}
-    >
+    <div className="hours-cells-column" onClick={initNewEvent} id={columnId}>
       {newEvent && newEventData && (
         <EventTile
           ref={newEventTileRef}

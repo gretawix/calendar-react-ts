@@ -1,9 +1,6 @@
 import type { OneWeekDay, SingleEvent } from '../types/main';
 
-export type initNewEventFn = (
-  event: React.MouseEvent,
-  columnId: string
-) => void;
+export type initNewEventFn = (event: React.MouseEvent) => void;
 
 export type ModalContextType = {
   isModalOpen: boolean;
@@ -21,8 +18,7 @@ export type DateContextType = {
 };
 
 export type EventsContextType = {
-  activeTileColId: string | null;
-  setActiveTileColId: (id: string | null) => void;
+  activeTileColId: string;
   initNewEvent: initNewEventFn;
   saveEvent: () => void;
   cancelEventCreation: () => void;

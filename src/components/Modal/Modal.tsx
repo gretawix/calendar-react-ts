@@ -4,9 +4,9 @@ import TopControls from './subComponents/TopControls/TopControls';
 import ControlButtons from './subComponents/ControlButtons/ControlButtons';
 import EventTitle from './subComponents/EventTitle/EventTitle';
 import EventSettings from './subComponents/EventSettings/EventSettings';
+import { useModal } from '../../hooks/useModal';
 
 import './modal.scss';
-import { useModal } from '../../hooks/useModal';
 
 const Modal = () => {
   const { modalRef } = useModal();

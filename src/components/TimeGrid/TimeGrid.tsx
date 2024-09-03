@@ -17,7 +17,7 @@ const TimeGrid = forwardRef<HTMLDivElement, TimeGridProps>(function TimeGrid(
   ref
 ) {
   const { week, hoursList } = useDate();
-  const { activeTileColId, initNewEvent } = useEvents();
+  const { activeTileColId } = useEvents();
 
   const hourColRef = useRef(null);
 
@@ -56,9 +56,6 @@ const TimeGrid = forwardRef<HTMLDivElement, TimeGridProps>(function TimeGrid(
           <GridColumn
             key={oneDay.id}
             columnId={oneDay.id}
-            onClick={(event: React.MouseEvent) =>
-              initNewEvent(event, oneDay.id)
-            }
             newEvent={oneDay.id === activeTileColId}
           />
         ))}

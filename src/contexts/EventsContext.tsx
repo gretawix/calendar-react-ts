@@ -8,10 +8,10 @@ import {
 } from 'react';
 import { useModal } from '../hooks/useModal';
 import { positionModalX, positionModalY } from '../utils/positioning';
+import { constructNewEvent } from '../utils/events';
 
 import type { EventsContextType, initNewEventFn } from './contextTypes';
 import type { SingleEvent } from '../types/main';
-import { constructNewEvent } from '../utils/events';
 
 export const EventsContext = createContext<EventsContextType | undefined>(
   undefined
@@ -20,20 +20,21 @@ export const EventsContext = createContext<EventsContextType | undefined>(
 export const EventsProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const [activeTileColId, setActiveTileColId] = useState<string | null>(null);
   const [clickedEvent, setClickedEvent] = useState<React.MouseEvent | null>(
     null
   );
-
   const [newEventData, setNewEventData] = useState<SingleEvent | null>(null);
   const { openModal, closeModal, modalRef, isModalOpen } = useModal();
+
+  const eventTarget = clickedEvent?.target;
+  const activeTileColId =
+    eventTarget instanceof HTMLElement ? eventTarget.id : '';
 
   const newEventTileRef = useRef(null);
 
   const initNewEvent: initNewEventFn = useCallback(
-    (event, columnId) => {
+    (event) => {
       openModal(event);
-      setActiveTileColId(columnId);
       setClickedEvent(event);
       const newEvent = constructNewEvent(event);
       setNewEventData(newEvent);
@@ -41,15 +42,16 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
     [openModal]
   );
 
-  const saveEvent = useCallback(() => {
-    closeModal();
-    setActiveTileColId(null);
-  }, [closeModal]);
-
   const cancelEventCreation = useCallback(() => {
     closeModal();
-    setActiveTileColId(null);
+    setNewEventData(null);
+    setClickedEvent(null);
   }, [closeModal]);
+
+  const saveEvent = useCallback(() => {
+    cancelEventCreation();
+    //saveEvent
+  }, [cancelEventCreation]);
 
   useEffect(() => {
     if (isModalOpen && clickedEvent && modalRef.current) {
@@ -62,7 +64,6 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
     <EventsContext.Provider
       value={{
         activeTileColId,
-        setActiveTileColId,
         initNewEvent,
         saveEvent,
         cancelEventCreation,
