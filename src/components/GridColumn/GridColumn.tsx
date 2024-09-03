@@ -5,15 +5,15 @@ import { useEvents } from '../../hooks/useEvents';
 
 type GridColumnProps = {
   columnId: string;
-  newEvent: boolean;
+  isNewEvent: boolean;
 };
 
-const GridColumn: React.FC<GridColumnProps> = ({ columnId, newEvent }) => {
+const GridColumn: React.FC<GridColumnProps> = ({ columnId, isNewEvent }) => {
   const { newEventTileRef, newEventData, initNewEvent } = useEvents();
 
   return (
     <div className="hours-cells-column" onClick={initNewEvent} id={columnId}>
-      {newEvent && newEventData && (
+      {isNewEvent && newEventData && (
         <EventTile
           ref={newEventTileRef}
           existingEvent={false}
@@ -28,7 +28,7 @@ const GridColumn: React.FC<GridColumnProps> = ({ columnId, newEvent }) => {
 
 const areEqual = (prevProps: GridColumnProps, nextProps: GridColumnProps) => {
   return (
-    prevProps.newEvent === nextProps.newEvent &&
+    prevProps.isNewEvent === nextProps.isNewEvent &&
     prevProps.columnId === nextProps.columnId
   );
 };

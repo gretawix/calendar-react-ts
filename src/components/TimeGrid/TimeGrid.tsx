@@ -56,7 +56,7 @@ const TimeGrid = forwardRef<HTMLDivElement, TimeGridProps>(function TimeGrid(
           <GridColumn
             key={oneDay.id}
             columnId={oneDay.id}
-            newEvent={oneDay.id === activeTileColId}
+            isNewEvent={oneDay.id === activeTileColId}
           />
         ))}
       </div>

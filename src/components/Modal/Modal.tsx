@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useRef } from 'react';
 import Button from '../Button/Button';
 import TopControls from './subComponents/TopControls/TopControls';
 import ControlButtons from './subComponents/ControlButtons/ControlButtons';
@@ -10,12 +10,18 @@ import './modal.scss';
 
 const Modal = () => {
   const { modalRef } = useModal();
+  const inputRefs = {
+    title: useRef<HTMLInputElement>(null),
+    date: useRef<HTMLInputElement>(null),
+    startTime: useRef<HTMLInputElement>(null),
+    endTime: useRef<HTMLInputElement>(null),
+  };
 
   return (
     <div className="event-modal" id="event-modal" ref={modalRef}>
       <TopControls />
-      <div className="event-content">
-        <EventTitle />
+      <form className="event-content">
+        <EventTitle titleRef={inputRefs.title} />
         <div className="event-settings">
           <div className="event-type-buttons">
             <Button title="Event" styleType="selected" />
@@ -24,8 +30,8 @@ const Modal = () => {
           </div>
           <EventSettings />
         </div>
-        <ControlButtons />
-      </div>
+        <ControlButtons inputRefs={inputRefs} />
+      </form>
     </div>
   );
 };
