@@ -29,11 +29,19 @@ const getStartTimeFromClick = (event: React.MouseEvent) => {
   return (adjustedDistanceFromTop / cellHeightInPx) * 60;
 };
 
-export const constructNewEvent = (event: React.MouseEvent): SingleEvent => {
-  const data = getDefaultEvent();
+export const constructNewEvent = (
+  event: React.MouseEvent,
+  activeTileColId: string
+): SingleEvent => {
+  const day = constructBasicDay(activeTileColId);
   const startTime = getStartTimeFromClick(event);
-  data.startTimeInMinutes = startTime;
-  data.eventLengthInMinutes = defaultEventLengthInMinutes;
 
-  return data;
+  return {
+    ...day,
+    title: '(no title)',
+    weekDayLong: WEEK_DAYS[day.weekDay],
+    monthLong: MONTHS[day.month],
+    startTimeInMinutes: startTime,
+    eventLengthInMinutes: defaultEventLengthInMinutes,
+  };
 };

@@ -3,19 +3,23 @@ import Button from '../../../Button/Button';
 import { useEvents } from '../../../../hooks/useEvents';
 
 import './controlButtons.scss';
+import type { InputRefs } from '../../../../types/main';
 
 type ControlButtonsProps = {
-  inputRefs: { [key: string]: React.RefObject<HTMLInputElement> };
+  inputRefs: InputRefs;
 };
 
 const ControlButtons = ({ inputRefs }: ControlButtonsProps) => {
-  const { saveEvent } = useEvents();
+  const { saveEvent, newEventData } = useEvents();
 
   const handleSaveClick = (event: React.MouseEvent) => {
     event.preventDefault();
     if (inputRefs.title.current) {
       const titleValue = inputRefs.title.current.value;
-      console.log(titleValue);
+      console.log(
+        titleValue,
+        inputRefs.date.current?.value ?? newEventData.day
+      );
       saveEvent();
     }
   };

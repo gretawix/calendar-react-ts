@@ -8,7 +8,7 @@ import {
 } from 'react';
 import { useModal } from '../hooks/useModal';
 import { positionModalX, positionModalY } from '../utils/positioning';
-import { constructNewEvent } from '../utils/events';
+import { constructNewEvent, getDefaultEvent } from '../utils/events';
 
 import type { EventsContextType, initNewEventFn } from './contextTypes';
 import type { SingleEvent } from '../types/main';
@@ -17,13 +17,15 @@ export const EventsContext = createContext<EventsContextType | undefined>(
   undefined
 );
 
+const defaultEvent = getDefaultEvent();
+
 export const EventsProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
   const [clickedEvent, setClickedEvent] = useState<React.MouseEvent | null>(
     null
   );
-  const [newEventData, setNewEventData] = useState<SingleEvent | null>(null);
+  const [newEventData, setNewEventData] = useState<SingleEvent>(defaultEvent);
   const { openModal, closeModal, modalRef, isModalOpen } = useModal();
 
   const eventTarget = clickedEvent?.target;
@@ -36,15 +38,17 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
     (event) => {
       openModal(event);
       setClickedEvent(event);
-      const newEvent = constructNewEvent(event);
-      setNewEventData(newEvent);
+      if (event.target instanceof HTMLElement) {
+        const updatedEventData = constructNewEvent(event, event.target.id);
+        setNewEventData(updatedEventData);
+      }
     },
     [openModal]
   );
 
   const cancelEventCreation = useCallback(() => {
     closeModal();
-    setNewEventData(null);
+    setNewEventData(defaultEvent);
     setClickedEvent(null);
   }, [closeModal]);
 

@@ -4,11 +4,22 @@ import GenericSetting from '../GenericSetting';
 import TimeDate from '../../TimeDate/TimeDate';
 
 import './eventSettings.scss';
+import type { InputRefs } from '../../../../types/main';
 
-const EventSettings = () => {
+type EventSettingsProps = {
+  inputRefs: InputRefs;
+};
+
+const EventSettings = ({ inputRefs }: EventSettingsProps) => {
   return (
     <div className="event-settings-selection">
-      <TimeDate />
+      <TimeDate
+        dateTimeInputRefs={{
+          date: inputRefs.date,
+          startTime: inputRefs.startTime,
+          endTime: inputRefs.endTime,
+        }}
+      />
       <GenericSetting>
         <Button title="Find a time" styleType="inline" />
       </GenericSetting>

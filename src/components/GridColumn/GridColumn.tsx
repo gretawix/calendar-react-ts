@@ -13,7 +13,7 @@ const GridColumn: React.FC<GridColumnProps> = ({ columnId, isNewEvent }) => {
 
   return (
     <div className="hours-cells-column" onClick={initNewEvent} id={columnId}>
-      {isNewEvent && newEventData && (
+      {isNewEvent && (
         <EventTile
           ref={newEventTileRef}
           existingEvent={false}

@@ -64,7 +64,8 @@ const getCurrentWeek = (baseDay: Date) => {
   return week;
 };
 
-const getTime = (minutes: number): string => {
+const getTime = (minutes: number | undefined): string => {
+  if (!minutes) return '00:00';
   const hours = Math.floor(minutes / 60);
   const remainingMinutes = minutes % 60;
   const formattedHours = hours.toString().padStart(2, '0');

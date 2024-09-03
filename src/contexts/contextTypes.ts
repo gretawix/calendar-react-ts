@@ -24,5 +24,5 @@ export type EventsContextType = {
   cancelEventCreation: () => void;
   newEventTileRef: React.RefObject<HTMLDivElement>;
   clickedEvent: React.MouseEvent | null;
-  newEventData: SingleEvent | null;
+  newEventData: SingleEvent;
 };

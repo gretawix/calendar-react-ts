@@ -46,3 +46,11 @@ export type IconName =
   | 'work'
   | 'lock'
   | 'notifications';
+
+export type RefObjectMap<K extends string> = {
+  [P in K]: React.RefObject<HTMLInputElement>;
+};
+
+export type InputRefs = RefObjectMap<
+  'title' | 'date' | 'startTime' | 'endTime'
+>;

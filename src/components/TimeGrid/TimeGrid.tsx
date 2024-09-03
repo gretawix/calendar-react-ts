@@ -3,7 +3,6 @@ import GridColumn from '../GridColumn/GridColumn';
 import { useScroll } from '../../hooks/useScroll';
 import { useDate } from '../../hooks/useDate';
 import { useEvents } from '../../hooks/useEvents';
-
 import type { ScrollRef } from '../../types/main';
 
 import './timeGrid.scss';

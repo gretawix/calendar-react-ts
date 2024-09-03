@@ -12,8 +12,8 @@ import { cellHeightInPx } from './contants/constants';
 function App() {
   const { isModalOpen } = useModal();
 
-  const weekDaysRowRef = useRef(null);
-  const timeGridRef = useRef(null);
+  const weekDaysRowRef = useRef<HTMLDivElement>(null);
+  const timeGridRef = useRef<HTMLDivElement>(null);
 
   const { handleHorizontalScroll } = useScroll();
 
@@ -30,6 +30,9 @@ function App() {
       '--cell-height',
       `${cellHeightInPx}px`
     );
+    if (timeGridRef.current) {
+      timeGridRef.current.scrollTop = cellHeightInPx * 8;
+    }
   }, []);
 
   return (

@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { forwardRef, memo } from 'react';
 
 import '../../styles/buttons.scss';
 
@@ -8,24 +8,21 @@ type ButtonProps = {
   type?: string;
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button = ({
-  title,
-  styleType,
-  className,
-  type,
-  ...rest
-}: ButtonProps) => {
-  return (
-    <>
-      <button
-        type={type ? type : 'button'}
-        className={`${styleType ?? ''} ${className ?? ''}`.trim()}
-        {...rest}
-      >
-        {styleType === 'clickable' ? <span>{title}</span> : title}
-      </button>
-    </>
-  );
-};
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ title, styleType, className, type, ...rest }, ref) => {
+    return (
+      <>
+        <button
+          type={type ? type : 'button'}
+          className={`${styleType ?? ''} ${className ?? ''}`.trim()}
+          ref={ref}
+          {...rest}
+        >
+          {styleType === 'clickable' ? <span>{title}</span> : title}
+        </button>
+      </>
+    );
+  }
+);
 
 export default memo(Button);

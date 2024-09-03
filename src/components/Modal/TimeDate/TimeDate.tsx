@@ -3,15 +3,26 @@ import Button from '../../Button/Button';
 import Dropdown from '../../Dropdown/Dropdown';
 import ModalIcon from '../ModalIcon/ModalIcon';
 
-import type { IconName } from '../../../types/main';
+import type { IconName, RefObjectMap } from '../../../types/main';
 
 import './timeDate.scss';
+import TextInput from '../../inputs/TextInput';
+import { useEvents } from '../../../hooks/useEvents';
+import { getTime } from '../../../utils/timeCalculations';
 
-const TimeDate = () => {
+type TimeDateProps = {
+  dateTimeInputRefs: RefObjectMap<'date' | 'startTime' | 'endTime'>;
+};
+
+const TimeDate = ({ dateTimeInputRefs }: TimeDateProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [date, setDate] = useState('Thursday, July 4');
-  const [startTime, setStartTime] = useState('09:00');
-  const [endTime, setEndTime] = useState('09:30');
+  const { newEventData } = useEvents();
+
+  const date = `${newEventData.weekDayLong}, ${newEventData.monthLong} ${newEventData.day}`;
+  const startTime = getTime(newEventData.startTimeInMinutes);
+  const endTime = getTime(
+    newEventData.startTimeInMinutes + newEventData.eventLengthInMinutes
+  );
 
   const iconName: IconName = 'schedule';
   const previewClasses = `${iconName ? 'has-icon ' : 'no-icon'} ${!isOpen ? 'preview-setting' : ''}  modal-event-side-margins`;
@@ -57,34 +68,24 @@ const TimeDate = () => {
         <ModalIcon iconName={iconName} />
         <div className="settings-inner time-date-settings">
           <div className="time-date-inputs-wrapper">
-            <label htmlFor="date">
-              <input
-                type="text"
-                id="date"
-                className="standard-input date-input"
-                value={date}
-                onChange={(event) => setDate(event.target.value)}
-              />
-            </label>
-            <label htmlFor="time-start" className="select-input">
-              <input
-                type="text"
-                id="time-start"
-                className="standard-input time-input"
-                value={startTime}
-                onChange={(event) => setStartTime(event.target.value)}
-              />
-            </label>
-            <p>–</p>
-            <label htmlFor="time-end" className="select-input">
-              <input
-                type="text"
-                id="time-end"
-                className="standard-input time-input"
-                value={endTime}
-                onChange={(event) => setEndTime(event.target.value)}
-              />
-            </label>
+            <TextInput
+              value={date}
+              ref={dateTimeInputRefs.date}
+              id="date"
+              style={{ width: 170 }}
+            />
+            <TextInput
+              value={startTime}
+              ref={dateTimeInputRefs.startTime}
+              id="time-start"
+              style={{ width: 52 }}
+            />
+            <TextInput
+              value={endTime}
+              ref={dateTimeInputRefs.endTime}
+              id="time-end"
+              style={{ width: 52 }}
+            />
           </div>
           <div className="time-date-other-settings">
             <label htmlFor="all-day" className="checkbox-input">

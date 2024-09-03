@@ -7,10 +7,11 @@ import EventSettings from './subComponents/EventSettings/EventSettings';
 import { useModal } from '../../hooks/useModal';
 
 import './modal.scss';
+import type { InputRefs } from '../../types/main';
 
 const Modal = () => {
   const { modalRef } = useModal();
-  const inputRefs = {
+  const inputRefs: InputRefs = {
     title: useRef<HTMLInputElement>(null),
     date: useRef<HTMLInputElement>(null),
     startTime: useRef<HTMLInputElement>(null),
@@ -28,7 +29,7 @@ const Modal = () => {
             <Button title="Task" />
             <Button title="Appointment schedule" />
           </div>
-          <EventSettings />
+          <EventSettings inputRefs={inputRefs} />
         </div>
         <ControlButtons inputRefs={inputRefs} />
       </form>
