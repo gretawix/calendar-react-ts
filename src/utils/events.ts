@@ -1,7 +1,7 @@
 import {
   cellHeightInPx,
   defaultEventLengthInMinutes,
-} from '../contants/constants';
+} from '../constants/constants';
 import {
   MONTHS,
   WEEK_DAYS,

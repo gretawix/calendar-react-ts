@@ -2,7 +2,6 @@ import { memo } from 'react';
 import EventTile from '../Tile/EventTile';
 import './gridColumn.scss';
 import { useEvents } from '../../hooks/useEvents';
-import { useModal } from '../../hooks/useModal';
 
 type GridColumnProps = {
   columnId: string;
@@ -10,18 +9,10 @@ type GridColumnProps = {
 };
 
 const GridColumn: React.FC<GridColumnProps> = ({ columnId, isNewEvent }) => {
-  const { newEventTileRef, newEventData, initNewEvent, cancelEventCreation } =
-    useEvents();
-  const { isModalOpen } = useModal();
+  const { newEventTileRef, newEventData, initNewEvent } = useEvents();
 
   return (
-    <div
-      className="hours-cells-column"
-      onClick={(event) =>
-        !isModalOpen ? initNewEvent(event) : cancelEventCreation()
-      }
-      id={columnId}
-    >
+    <div className="hours-cells-column" onClick={initNewEvent} id={columnId}>
       {isNewEvent && (
         <EventTile
           ref={newEventTileRef}

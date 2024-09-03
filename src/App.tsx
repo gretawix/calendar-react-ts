@@ -7,7 +7,7 @@ import Modal from './components/Modal/Modal';
 import { useModal } from './hooks/useModal';
 
 import './App.scss';
-import { cellHeightInPx } from './contants/constants';
+import { cellHeightInPx } from './constants/constants';
 
 function App() {
   const { isModalOpen } = useModal();

@@ -1,4 +1,4 @@
-import { cellHeightInPx } from '../contants/constants';
+import { cellHeightInPx } from '../constants/constants';
 
 export const positionModalX = (
   event: React.MouseEvent,

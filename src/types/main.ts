@@ -54,3 +54,10 @@ export type RefObjectMap<K extends string> = {
 export type InputRefs = RefObjectMap<
   'title' | 'date' | 'startTime' | 'endTime'
 >;
+
+export type EventsDataSource = 'local-storage' | 'server';
+
+export interface EventsService {
+  getAll(): Promise<SingleEvent[]>;
+  saveEvent(newEvent: SingleEvent): Promise<void>;
+}

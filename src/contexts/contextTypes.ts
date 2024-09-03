@@ -27,4 +27,5 @@ export type EventsContextType = {
   newEventTileRef: React.RefObject<HTMLDivElement>;
   clickedEvent: React.MouseEvent | null;
   newEventData: SingleEvent;
+  allEvents: SingleEvent[];
 };

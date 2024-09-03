@@ -1,7 +1,7 @@
 import { forwardRef, memo } from 'react';
 
 import './eventTile.scss';
-import { cellHeightInPx } from '../../contants/constants';
+import { cellHeightInPx } from '../../constants/constants';
 import { getTime } from '../../utils/timeCalculations';
 
 type TileProps = {

@@ -64,7 +64,7 @@ const TimeDate = ({ dateTimeInputRefs }: TimeDateProps) => {
   ];
 
   useEffect(() => {
-    console.log(date);
+    setIsOpen(false);
   }, [date]);
 
   if (!isOpen) {

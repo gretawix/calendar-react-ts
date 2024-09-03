@@ -6,22 +6,33 @@ import {
   useCallback,
   useEffect,
 } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { eventsServiceFactory } from '../dataFactories/eventsFactory';
 import { useModal } from '../hooks/useModal';
 import { positionModalX, positionModalY } from '../utils/positioning';
 import { constructNewEvent, getDefaultEvent } from '../utils/events';
 
 import type { EventsContextType, initNewEventFn } from './contextTypes';
-import type { SingleEvent } from '../types/main';
+import type { SingleEvent, EventsDataSource } from '../types/main';
 
+const dataSourceType: EventsDataSource = 'local-storage';
+const defaultEvent = getDefaultEvent();
+const eventsService = eventsServiceFactory(dataSourceType);
+const eventsQueryKey = 'events';
 export const EventsContext = createContext<EventsContextType | undefined>(
   undefined
 );
 
-const defaultEvent = getDefaultEvent();
-
 export const EventsProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
+  const query = useQuery({
+    queryKey: [eventsQueryKey],
+    queryFn: eventsService.getAll,
+  });
+
+  const { data: events, isLoading } = query;
+
   const [clickedEvent, setClickedEvent] = useState<React.MouseEvent | null>(
     null
   );
@@ -67,6 +78,12 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
     }
   }, [isModalOpen, clickedEvent, modalRef]);
 
+  const allEvents = events ?? [];
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <EventsContext.Provider
       value={{
@@ -79,6 +96,7 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
         newEventTileRef,
         clickedEvent,
         newEventData,
+        allEvents,
       }}
     >
       {children}
