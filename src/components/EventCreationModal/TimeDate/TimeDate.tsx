@@ -1,11 +1,10 @@
-import { memo, useCallback, useEffect, useState } from 'react';
+import { memo, useEffect, useState } from 'react';
 import Button from '../../Button';
 import Dropdown from '../../Dropdown';
 import ModalIcon from '../ModalIcon';
 import TextInput from '../../inputs/TextInput';
 import { useNewEvent } from '../../../hooks/useNewEvent';
 import { getTime } from '../../../utils/time';
-import { useDate } from '../../../hooks/useDate';
 import useTimeDateUpdate from './useTimeDateUpdate';
 
 import type { IconName } from '../../../types';
@@ -21,8 +20,7 @@ const TimeDate = () => {
   const [formEndTime, setFormEndTime] = useState('');
   const { updateDate, updateStartTime, updateEndTime } = useTimeDateUpdate();
 
-  const { newEventData, setNewEventData, setActiveTileColId } = useNewEvent();
-  const { week } = useDate();
+  const { newEventData } = useNewEvent();
   const date = `${newEventData.weekDayLong}, ${newEventData.monthLong} ${newEventData.day}`;
   const startTime = getTime(newEventData.startTimeInMinutes);
   const endTime = getTime(
@@ -45,18 +43,6 @@ const TimeDate = () => {
     'Custom...',
   ];
 
-  const setNewDate = useCallback(() => {
-    updateDate(setNewEventData, formDate, week, setActiveTileColId);
-  }, [formDate, setActiveTileColId, setNewEventData, updateDate, week]);
-
-  const setNewStartTime = useCallback(() => {
-    updateStartTime(setNewEventData, formStartTime);
-  }, [formStartTime, setNewEventData, updateStartTime]);
-
-  const setNewEndTime = useCallback(() => {
-    updateEndTime(setNewEventData, formEndTime);
-  }, [formEndTime, setNewEventData, updateEndTime]);
-
   useEffect(() => {
     setIsOpen(false);
     setFormDate(date);
@@ -77,21 +63,21 @@ const TimeDate = () => {
                 defaultValue={date}
                 id="date"
                 style={{ width: 170 }}
-                onBlur={setNewDate}
+                onBlur={() => updateDate(formDate)}
                 onChange={(event) => setFormDate(event.target.value)}
               />
               <TextInput
                 defaultValue={startTime}
                 id="time-start"
                 style={{ width: 52 }}
-                onBlur={setNewStartTime}
+                onBlur={() => updateStartTime(formStartTime)}
                 onChange={(event) => setFormStartTime(event.target.value)}
               />
               <TextInput
                 defaultValue={endTime}
                 id="time-end"
                 style={{ width: 52 }}
-                onBlur={setNewEndTime}
+                onBlur={() => updateEndTime(formEndTime)}
                 onChange={(event) => setFormEndTime(event.target.value)}
               />
             </div>
