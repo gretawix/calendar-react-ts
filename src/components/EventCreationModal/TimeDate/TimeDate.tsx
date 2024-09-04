@@ -6,12 +6,12 @@ import TextInput from '../../inputs/TextInput';
 import { useNewEvent } from '../../../hooks/useNewEvent';
 import { getTime } from '../../../utils/time';
 import useTimeDateUpdate from './useTimeDateUpdate';
+import classNames from 'classnames';
+import TimeDatePreview from './TimeDatePreview';
 
 import type { IconName } from '../../../types';
 
 import './timeDate.scss';
-import classNames from 'classnames';
-import TimeDatePreview from './TimeDatePreview';
 
 const TimeDate = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -40,6 +40,15 @@ const TimeDate = () => {
     'Custom...',
   ];
 
+  const setNewDate = (event: React.FocusEvent<HTMLInputElement>) =>
+    updateDate(event.target.value);
+
+  const setNewStartTime = (event: React.FocusEvent<HTMLInputElement>) =>
+    updateStartTime(event.target.value);
+
+  const setNewEndTime = (event: React.FocusEvent<HTMLInputElement>) =>
+    updateEndTime(event.target.value);
+
   useEffect(() => {
     setIsOpen(false);
   }, [date]);
@@ -55,19 +64,19 @@ const TimeDate = () => {
                 defaultValue={date}
                 id="date"
                 style={{ width: 170 }}
-                onBlur={(event) => updateDate(event.target.value)}
+                onBlur={setNewDate}
               />
               <TextInput
                 defaultValue={startTime}
                 id="time-start"
                 style={{ width: 52 }}
-                onBlur={(event) => updateStartTime(event.target.value)}
+                onBlur={setNewStartTime}
               />
               <TextInput
                 defaultValue={endTime}
                 id="time-end"
                 style={{ width: 52 }}
-                onBlur={(event) => updateEndTime(event.target.value)}
+                onBlur={setNewEndTime}
               />
             </div>
             <div className="time-date-other-settings">
