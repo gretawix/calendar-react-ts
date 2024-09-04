@@ -1,7 +1,8 @@
 import { memo, ReactNode } from 'react';
+import ModalIcon from './ModalIcon';
+import classNames from 'classnames';
 
 import type { IconName } from '../../types';
-import ModalIcon from './ModalIcon';
 
 type OneSettingProps = {
   iconName?: IconName | 'google-meets';
@@ -9,7 +10,14 @@ type OneSettingProps = {
 };
 
 const OneSetting = ({ iconName, children }: OneSettingProps) => {
-  const previewClasses = `${iconName ? 'has-icon ' : 'no-icon'} preview-setting modal-event-side-margins`;
+  const previewClasses = classNames(
+    'preview-setting',
+    'modal-event-side-margins',
+    {
+      'has-icon': iconName,
+      'no-icon': !iconName,
+    }
+  );
 
   return (
     <div className="single-setting-section">

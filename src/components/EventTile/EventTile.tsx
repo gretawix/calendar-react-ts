@@ -3,6 +3,7 @@ import { forwardRef, memo } from 'react';
 import './eventTile.scss';
 import { cellHeightInPx } from '../../constants';
 import { getTime } from '../../utils/time';
+import classNames from 'classnames';
 
 type TileProps = {
   existingEvent: boolean;
@@ -26,10 +27,14 @@ const EventTile = forwardRef<HTMLDivElement, TileProps>(
       eventLengthClass = 'long';
     }
 
+    const tileClasses = classNames('event-tile', 'regular', eventLengthClass, {
+      placeholder: !existingEvent,
+    });
+
     return (
       <div
         ref={ref}
-        className={`event-tile regular ${!existingEvent ? 'placeholder' : ''} ${eventLengthClass}`}
+        className={tileClasses}
         style={{ top: distanceFromTop, height: tileLength }}
       >
         <p className="event-tile-title">{title}</p>

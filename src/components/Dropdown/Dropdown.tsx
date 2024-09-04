@@ -1,4 +1,5 @@
 import { memo, useState } from 'react';
+import classNames from 'classnames';
 
 import './dropdown.scss';
 import '../../styles/buttons.scss';
@@ -18,8 +19,12 @@ const Dropdown = ({ options }: DropdownProps) => {
     setIsOpen(false);
   };
 
+  const selectInputClass = classNames('select-input', {
+    open: isOpen,
+  });
+
   return (
-    <div className={`select-input ${isOpen ? 'open' : ''}`}>
+    <div className={selectInputClass}>
       <button
         type="button"
         className="dropdown"
@@ -34,11 +39,15 @@ const Dropdown = ({ options }: DropdownProps) => {
       {isOpen && (
         <ul className="repeat-options select-options">
           {options.map((item) => {
+            const itemClass = classNames({
+              selected: selected === item,
+            });
+
             return (
               <li
                 key={item}
                 id={generateId(item)}
-                className={selected === item ? 'selected' : ''}
+                className={itemClass}
                 onClick={() => selectItem(item)}
               >
                 {item}

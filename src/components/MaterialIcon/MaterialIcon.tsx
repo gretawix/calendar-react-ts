@@ -3,6 +3,7 @@ import { memo } from 'react';
 import type { IconName } from '../../types';
 
 import './materialIcon.scss';
+import classNames from 'classnames';
 
 type MaterialSymbolProps = {
   iconName: IconName;
@@ -10,11 +11,11 @@ type MaterialSymbolProps = {
 };
 
 const MaterialSymbol = ({ iconName, small = false }: MaterialSymbolProps) => {
-  return (
-    <i className={`material-symbols-outlined ${small ? 'small' : ''}`}>
-      {iconName}
-    </i>
-  );
+  const iconClass = classNames('material-symbols-outlined', {
+    small,
+  });
+
+  return <i className={iconClass}>{iconName}</i>;
 };
 
 export default memo(MaterialSymbol);

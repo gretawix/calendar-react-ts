@@ -14,6 +14,7 @@ import { SHORT_MONTHS_NAMES } from '../../../types/constants';
 import type { IconName, RefObjectMap } from '../../../types';
 
 import './timeDate.scss';
+import classNames from 'classnames';
 
 type TimeDateProps = {
   dateTimeInputRefs: RefObjectMap<'date' | 'startTime' | 'endTime'>;
@@ -54,7 +55,13 @@ const TimeDate = ({ dateTimeInputRefs }: TimeDateProps) => {
   }, [dateTimeInputRefs?.date, setActiveTileColId, setNewEventData, week]);
 
   const iconName: IconName = 'schedule';
-  const previewClasses = `${iconName ? 'has-icon ' : 'no-icon'} ${!isOpen ? 'preview-setting' : ''}  modal-event-side-margins`;
+
+  const previewClasses = classNames('modal-event-side-margins', {
+    'has-icon': iconName,
+    'no-icon': !iconName,
+    'preview-setting': !isOpen,
+  });
+
   const repeatOptions = [
     'Does not repeat',
     'Daily',
