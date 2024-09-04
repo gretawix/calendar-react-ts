@@ -2,7 +2,7 @@ import { forwardRef, memo, useRef } from 'react';
 import GridColumn from '../GridColumn';
 import { useScroll } from '../../hooks/useScroll';
 import { useDate } from '../../hooks/useDate';
-import { useEvents } from '../../hooks/useEvents';
+import { useNewEvent } from '../../hooks/useNewEvent';
 import type { ScrollRef } from '../../types';
 
 import './timeGrid.scss';
@@ -14,7 +14,7 @@ type TimeGridProps = {
 const TimeGrid = forwardRef<HTMLDivElement, TimeGridProps>(
   ({ onHorizontalScroll }, ref) => {
     const { week, hoursList } = useDate();
-    const { activeTileColId } = useEvents();
+    const { activeTileColId } = useNewEvent();
 
     const hourColRef = useRef(null);
 

@@ -29,6 +29,7 @@ export type SingleEvent = Day & {
   monthLong: MonthNamesLong;
   startTimeInMinutes: number;
   eventLengthInMinutes: number;
+  id: string;
 };
 
 export type ScrollRef = React.RefObject<HTMLDivElement>;

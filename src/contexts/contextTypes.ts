@@ -17,15 +17,17 @@ export type DateContextType = {
   timeZone: string;
 };
 
-export type EventsContextType = {
+export type NewEventContextType = {
   setNewEventData: React.Dispatch<React.SetStateAction<SingleEvent>>;
   setActiveTileColId: React.Dispatch<React.SetStateAction<string>>;
   activeTileColId: string;
   initNewEvent: initNewEventFn;
   saveEvent: () => void;
   cancelEventCreation: () => void;
-  newEventTileRef: React.RefObject<HTMLDivElement>;
   clickedEvent: React.MouseEvent | null;
   newEventData: SingleEvent;
+};
+
+export type AllEventsContextType = {
   allEvents: SingleEvent[];
 };

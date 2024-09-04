@@ -2,49 +2,35 @@ import {
   createContext,
   useState,
   ReactNode,
-  useRef,
   useCallback,
   useEffect,
 } from 'react';
-import { useQuery } from '@tanstack/react-query';
-import { eventsServiceFactory } from '../../dataFactories/eventsFactory';
+import { eventsService } from '../../eventService';
 import { useModal } from '../../hooks/useModal';
 import { positionModalX, positionModalY } from './utils';
 import { constructNewEvent, getDefaultEvent } from './utils';
 
-import type { EventsContextType, initNewEventFn } from '../contextTypes';
-import type { SingleEvent, EventsDataSource } from '../../types';
+import type { NewEventContextType, initNewEventFn } from '../contextTypes';
+import type { SingleEvent } from '../../types';
 
-const dataSourceType: EventsDataSource = 'local-storage';
 const defaultEvent = getDefaultEvent();
-const eventsService = eventsServiceFactory(dataSourceType);
-const eventsQueryKey = 'events';
-export const EventsContext = createContext<EventsContextType | undefined>(
+
+export const NewEventContext = createContext<NewEventContextType | undefined>(
   undefined
 );
 
 export const EventsProvider: React.FC<{ children: ReactNode }> = ({
   children,
 }) => {
-  const query = useQuery({
-    queryKey: [eventsQueryKey],
-    queryFn: eventsService.getAll,
-  });
-
-  const { data: events, isLoading } = query;
-
   const [clickedEvent, setClickedEvent] = useState<React.MouseEvent | null>(
     null
   );
   const [newEventData, setNewEventData] = useState<SingleEvent>(defaultEvent);
   const { openModal, closeModal, modalRef, isModalOpen } = useModal();
-
   const eventTarget = clickedEvent?.target;
   const [activeTileColId, setActiveTileColId] = useState(
     eventTarget instanceof HTMLElement ? eventTarget.id : ''
   );
-
-  const newEventTileRef = useRef(null);
 
   const initNewEvent: initNewEventFn = useCallback(
     (event) => {
@@ -68,8 +54,8 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
 
   const saveEvent = useCallback(() => {
     cancelEventCreation();
-    //saveEvent
-  }, [cancelEventCreation]);
+    eventsService.saveEvent(newEventData);
+  }, [cancelEventCreation, newEventData]);
 
   useEffect(() => {
     if (isModalOpen && clickedEvent && modalRef.current) {
@@ -78,14 +64,8 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
     }
   }, [isModalOpen, clickedEvent, modalRef]);
 
-  const allEvents = events ?? [];
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   return (
-    <EventsContext.Provider
+    <NewEventContext.Provider
       value={{
         activeTileColId,
         setNewEventData,
@@ -93,13 +73,11 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
         initNewEvent,
         saveEvent,
         cancelEventCreation,
-        newEventTileRef,
         clickedEvent,
         newEventData,
-        allEvents,
       }}
     >
       {children}
-    </EventsContext.Provider>
+    </NewEventContext.Provider>
   );
 };

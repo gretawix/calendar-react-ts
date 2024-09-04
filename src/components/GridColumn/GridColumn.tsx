@@ -1,7 +1,8 @@
 import { memo } from 'react';
 import EventTile from '../EventTile';
 import './gridColumn.scss';
-import { useEvents } from '../../hooks/useEvents';
+import { useNewEvent } from '../../hooks/useNewEvent';
+import { useAllEvents } from '../../hooks/useAllEvents';
 
 type GridColumnProps = {
   columnId: string;
@@ -9,19 +10,32 @@ type GridColumnProps = {
 };
 
 const GridColumn: React.FC<GridColumnProps> = ({ columnId, isNewEvent }) => {
-  const { newEventTileRef, newEventData, initNewEvent } = useEvents();
+  const { newEventData, initNewEvent } = useNewEvent();
+  const { allEvents } = useAllEvents();
 
   return (
     <div className="hours-cells-column" onClick={initNewEvent} id={columnId}>
       {isNewEvent && (
         <EventTile
-          ref={newEventTileRef}
-          existingEvent={false}
           title={newEventData.title}
           startTime={newEventData.startTimeInMinutes}
           eventLength={newEventData.eventLengthInMinutes}
         />
       )}
+      {allEvents.map((event) => {
+        const dayId = `${event.weekDay}-${event.month}-${event.day}-${event.year}`;
+        return (
+          dayId === columnId && (
+            <EventTile
+              key={event.id}
+              existingEvent={true}
+              title={event.title}
+              startTime={event.startTimeInMinutes}
+              eventLength={event.eventLengthInMinutes}
+            />
+          )
+        );
+      })}
     </div>
   );
 };

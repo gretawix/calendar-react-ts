@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import Button from '../../Button';
-import { useEvents } from '../../../hooks/useEvents';
+import { useNewEvent } from '../../../hooks/useNewEvent';
 
 import './controlButtons.scss';
 import type { InputRefs } from '../../../types';
@@ -10,7 +10,7 @@ type ControlButtonsProps = {
 };
 
 const ControlButtons = ({ inputRefs }: ControlButtonsProps) => {
-  const { saveEvent, newEventData } = useEvents();
+  const { saveEvent, newEventData } = useNewEvent();
 
   const handleSaveClick = (event: React.MouseEvent) => {
     event.preventDefault();

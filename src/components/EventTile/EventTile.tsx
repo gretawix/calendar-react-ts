@@ -6,7 +6,7 @@ import { getTime } from '../../utils/time';
 import classNames from 'classnames';
 
 type TileProps = {
-  existingEvent: boolean;
+  existingEvent?: boolean;
   title: string;
   startTime: number;
   eventLength: number;

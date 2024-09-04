@@ -3,7 +3,7 @@ import Button from '../../Button';
 import Dropdown from '../../Dropdown';
 import ModalIcon from '../ModalIcon';
 import TextInput from '../../inputs/TextInput';
-import { useEvents } from '../../../hooks/useEvents';
+import { useNewEvent } from '../../../hooks/useNewEvent';
 import { getTime } from '../../../utils/time';
 import { getDate } from './utils';
 import { updateEventDate } from './utils';
@@ -22,7 +22,7 @@ type TimeDateProps = {
 
 const TimeDate = ({ dateTimeInputRefs }: TimeDateProps) => {
   const [isOpen, setIsOpen] = useState(false);
-  const { newEventData, setNewEventData, setActiveTileColId } = useEvents();
+  const { newEventData, setNewEventData, setActiveTileColId } = useNewEvent();
   const { week } = useDate();
 
   const date = `${newEventData.weekDayLong}, ${newEventData.monthLong} ${newEventData.day}`;

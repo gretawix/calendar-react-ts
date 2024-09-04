@@ -72,6 +72,7 @@ export const constructNewEvent = (
     monthLong: MONTHS[day.month],
     startTimeInMinutes: startTime,
     eventLengthInMinutes: defaultEventLengthInMinutes,
+    id: new Date().toString(),
   };
 };
 
@@ -87,5 +88,6 @@ export const getDefaultEvent = (): SingleEvent => {
     monthLong: MONTHS[day.month],
     startTimeInMinutes: defaultStartTime,
     eventLengthInMinutes: defaultStartTime + defaultEventLengthInMinutes,
+    id: new Date().toString(),
   };
 };
