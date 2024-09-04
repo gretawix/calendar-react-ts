@@ -1,0 +1,52 @@
+import { forwardRef, memo } from 'react';
+import { cellHeightInPx } from '../../constants';
+import { getTime } from '../../utils/time';
+import classNames from 'classnames';
+
+type TileProps = {
+  existingEvent?: boolean;
+  title: string;
+  startTime: number;
+  eventLength: number;
+};
+
+const EventTile = forwardRef<HTMLDivElement, TileProps>(
+  ({ existingEvent = false, title, startTime, eventLength }, ref) => {
+    const distanceFromTop = (startTime / 60) * cellHeightInPx;
+    let tileLength = (eventLength / 60) * cellHeightInPx;
+
+    let eventLengthClass = 'regular';
+    if (eventLength <= 15) {
+      eventLengthClass = 'shortest';
+      tileLength = cellHeightInPx / 4;
+    } else if (eventLength <= 30) {
+      eventLengthClass = 'short';
+    } else if (eventLength > 60) {
+      eventLengthClass = 'long';
+    }
+
+    const tileClasses = classNames('event-tile', 'regular', eventLengthClass, {
+      placeholder: !existingEvent,
+    });
+
+    const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+      event.stopPropagation();
+    };
+
+    return (
+      <div
+        onClick={handleClick}
+        ref={ref}
+        className={tileClasses}
+        style={{ top: distanceFromTop, height: tileLength }}
+      >
+        <p className="event-tile-title">{title}</p>
+        <p className="event-tile-time">
+          {getTime(startTime)} - {getTime(startTime + eventLength)}
+        </p>
+      </div>
+    );
+  }
+);
+
+export default memo(EventTile);

@@ -1,0 +1,134 @@
+.modal-event-side-margins {
+  padding: 0 16px;
+}
+.event-settings-selection {
+  padding: var(--spacing-sides) 0;
+  .single-setting-section {
+    &.separated-top {
+      border-top: 1px solid var(--grey-light);
+      padding-top: 8px;
+      margin-top: 7px;
+    }
+    &.separated-bottom {
+      border-bottom: 1px solid var(--grey-light);
+      padding-bottom: 8px;
+      margin-bottom: 7px;
+    }
+  }
+}
+.no-icon {
+  padding-left: 60px;
+}
+.has-icon {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  .modal-icon {
+    width: var(--side-icon-width);
+    height: var(--side-icon-width);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+.full-settings {
+  flex-direction: column;
+  .has-icon {
+    width: 100%;
+    align-items: flex-start;
+  }
+  &.active {
+    display: flex;
+  }
+}
+.settings-width {
+  width: calc(100% - var(--side-icon-width) - 8px);
+}
+.to-select {
+  padding: 0;
+  min-height: 36px;
+  max-width: 100%;
+  transition: background-color 0.5s ease;
+  background-color: transparent;
+  border-radius: 4px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  cursor: pointer;
+  &:hover {
+    background-color: var(--grey-super-light);
+  }
+}
+.action-description {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 0.75rem;
+  line-height: 20px;
+  list-style-type: none;
+  padding: 0 8px 6px 8px;
+  li {
+    color: var(--grey-medium-dark);
+    white-space: nowrap;
+    position: relative;
+    &:after {
+      padding: 0 4px;
+      content: '·';
+      font-weight: bold;
+      height: 14px;
+    }
+    &:last-child {
+      &:after {
+        display: none;
+      }
+    }
+  }
+}
+
+.location,
+.description {
+  .to-select {
+    p,
+    span {
+      color: var(--grey-medium-dark);
+    }
+    p {
+      padding: 0 8px;
+    }
+  }
+}
+
+.location {
+  input {
+    width: 100%;
+  }
+}
+
+.google-meet {
+  margin-top: 2px;
+  .google-meet-selection {
+    margin-left: 8px;
+  }
+  .custom-icon {
+    width: 20px;
+  }
+}
+
+.status {
+  .to-select {
+    .name-wrapper {
+      padding-top: 6px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      p {
+        padding: 0 8px;
+      }
+    }
+  }
+  .no-icon {
+    margin-left: -8px;
+  }
+}

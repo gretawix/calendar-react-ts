@@ -1,0 +1,28 @@
+.time-date-select {
+  p {
+    padding-top: 6px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+}
+.time-date-settings {
+  .time-date-inputs-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+  }
+  button {
+    color: var(--grey-dark);
+    font-weight: 400;
+  }
+  .time-date-other-settings {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  .checkbox-input {
+    margin-left: 8px;
+  }
+}

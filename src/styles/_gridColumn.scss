@@ -1,0 +1,12 @@
+.hours-cells-column {
+  height: calc(24 * var(--cell-height));
+  position: relative;
+  border-left: 1px solid var(--grey-light);
+  min-width: var(--min-col-width);
+  background: repeating-linear-gradient(
+    var(--white),
+    var(--white) 48px,
+    var(--grey-light) 48px,
+    var(--grey-light) var(--cell-height)
+  );
+}

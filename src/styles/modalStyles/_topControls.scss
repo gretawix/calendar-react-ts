@@ -1,0 +1,20 @@
+.top-controls {
+  background-color: var(--blue-light);
+  padding: 4px 8px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  button {
+    padding: 2px;
+    border-radius: 50%;
+    background-color: transparent;
+    height: fit-content;
+    &:hover {
+      background-color: var(--grey-light);
+    }
+    i {
+      font-weight: 300;
+    }
+  }
+}

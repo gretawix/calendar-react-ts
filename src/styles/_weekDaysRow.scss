@@ -1,0 +1,32 @@
+@import './common';
+
+.time-zone-cell {
+  display: flex;
+  width: 100%;
+  align-items: flex-end;
+}
+
+.time-zone {
+  @include hourStyle;
+}
+
+.week-days-part {
+  @include gridStyling;
+  height: var(--week-days-height);
+  padding-right: var(--scrollbar-width);
+  .divider,
+  .week-days {
+    border-bottom: 1px solid var(--grey-light);
+  }
+}
+
+.week-days {
+  @include columnGridStyling;
+  overflow: scroll;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  &:hover {
+    overflow: hidden;
+  }
+}
