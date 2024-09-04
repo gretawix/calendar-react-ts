@@ -13,6 +13,7 @@ const Modal = () => {
   const { modalRef } = useModal();
   const { saveEvent } = useNewEvent();
   const [title, setTitle] = useState('');
+  const [startTime, setStartTime] = useState('');
   const [formDate, setNewFormDate] = useState('');
 
   const handleSaveClick = (event: React.FormEvent<HTMLFormElement>) => {
@@ -34,7 +35,12 @@ const Modal = () => {
             <Button title="Task" />
             <Button title="Appointment schedule" />
           </div>
-          <EventSettings formDate={formDate} updateDate={setNewFormDate} />
+          <EventSettings
+            formDate={formDate}
+            updateDate={setNewFormDate}
+            formStartTime={startTime}
+            updateStartTime={setStartTime}
+          />
         </div>
         <ControlButtons />
       </form>

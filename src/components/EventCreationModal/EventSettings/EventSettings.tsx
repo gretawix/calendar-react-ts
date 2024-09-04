@@ -7,13 +7,25 @@ import './eventSettings.scss';
 
 type EventSettingsProps = {
   formDate: string;
+  formStartTime: string;
   updateDate: React.Dispatch<React.SetStateAction<string>>;
+  updateStartTime: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const EventSettings = ({ formDate, updateDate }: EventSettingsProps) => {
+const EventSettings = ({
+  formDate,
+  formStartTime,
+  updateStartTime,
+  updateDate,
+}: EventSettingsProps) => {
   return (
     <div className="event-settings-selection">
-      <TimeDate formDate={formDate} onDateUpdate={updateDate} />
+      <TimeDate
+        formDate={formDate}
+        onDateUpdate={updateDate}
+        formStartTime={formStartTime}
+        onStartTimeUpdate={updateStartTime}
+      />
       <GenericSetting>
         <Button title="Find a time" styleType="inline" />
       </GenericSetting>
