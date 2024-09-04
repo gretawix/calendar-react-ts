@@ -6,7 +6,7 @@ import EventTitle from './EventTitle';
 import EventSettings from './EventSettings';
 import { useModal } from '../../hooks/useModal';
 
-import './modal.scss';
+import './EventCreationModal.scss';
 import type { InputRefs } from '../../types';
 
 const Modal = () => {

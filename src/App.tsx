@@ -3,7 +3,7 @@ import WeekDaysRow from './components/WeekDaysRow';
 
 import TimeGrid from './components/TimeGrid';
 import { useScroll } from './hooks/useScroll';
-import Modal from './components/Modal';
+import Modal from './components/EventCreationModal';
 import { useModal } from './hooks/useModal';
 
 import './App.scss';
