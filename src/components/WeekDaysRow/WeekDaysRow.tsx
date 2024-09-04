@@ -9,7 +9,7 @@ type WeekDaysRowProps = {
 };
 
 const WeekDaysRow = forwardRef<HTMLDivElement, WeekDaysRowProps>(
-  function WeekDaysRow({ onScroll }, ref) {
+  ({ onScroll }, ref) => {
     const { today, timeZone, week } = useDate();
 
     return (
