@@ -1,5 +1,4 @@
 import { memo, useCallback, useState } from 'react';
-import './eventTitle.scss';
 import { useNewEvent } from '../../../hooks/useNewEvent';
 
 const EventTitle = () => {

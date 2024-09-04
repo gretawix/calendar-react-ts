@@ -1,6 +1,4 @@
 import { forwardRef, memo } from 'react';
-
-import './eventTile.scss';
 import { cellHeightInPx } from '../../constants';
 import { getTime } from '../../utils/time';
 import classNames from 'classnames';

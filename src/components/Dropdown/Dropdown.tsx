@@ -1,9 +1,6 @@
 import { memo, useState } from 'react';
 import classNames from 'classnames';
 
-import './dropdown.scss';
-import '../../styles/buttons.scss';
-
 type DropdownProps = { options: string[]; initialValue: string };
 
 const Dropdown = ({ options, initialValue }: DropdownProps) => {

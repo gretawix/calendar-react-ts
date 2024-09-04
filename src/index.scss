@@ -1,5 +1,4 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
-@import './styles/inputs';
 
 :root {
   --week-grid: 7;
@@ -71,3 +70,23 @@ img {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--grey-medium);
 }
+
+@import './styles/app';
+@import './styles/inputs';
+@import './styles/buttons';
+@import './styles/common';
+@import './styles/dropdown';
+@import './styles/eventTile';
+@import './styles/gridColumn';
+@import './styles/materialIcon';
+@import './styles/timeGrid';
+@import './styles/weekDay';
+@import './styles/weekDaysRow';
+
+@import './styles/modalStyles/controlButtons';
+@import './styles/modalStyles/eventCreationModal';
+@import './styles/modalStyles/eventSettings';
+@import './styles/modalStyles/eventTitle';
+@import './styles/modalStyles/modalIcon';
+@import './styles/modalStyles/timeDate';
+@import './styles/modalStyles/topControls';

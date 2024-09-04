@@ -2,7 +2,6 @@ import { memo } from 'react';
 
 import type { IconName } from '../../types';
 
-import './materialIcon.scss';
 import classNames from 'classnames';
 
 type MaterialSymbolProps = {

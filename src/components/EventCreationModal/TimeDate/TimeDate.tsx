@@ -11,8 +11,6 @@ import TimeDatePreview from './TimeDatePreview';
 
 import type { IconName } from '../../../types';
 
-import './timeDate.scss';
-
 const TimeDate = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { updateDate, updateStartTime, updateEndTime } = useTimeDateUpdate();

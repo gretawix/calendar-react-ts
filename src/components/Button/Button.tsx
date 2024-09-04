@@ -1,8 +1,6 @@
 import { forwardRef, memo } from 'react';
 import classNames from 'classnames';
 
-import '../../styles/buttons.scss';
-
 type ButtonProps = {
   title: string;
   styleType?: 'selected' | 'cta' | 'inline' | 'clickable';

@@ -1,8 +1,5 @@
 import { memo } from 'react';
 import Button from '../../Button';
-// import { useNewEvent } from '../../../hooks/useNewEvent';
-
-import './controlButtons.scss';
 
 const ControlButtons = () => {
   return (

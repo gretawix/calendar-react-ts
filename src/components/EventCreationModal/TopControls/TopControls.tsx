@@ -3,8 +3,6 @@ import MaterialSymbol from '../../MaterialIcon';
 import { useNewEvent } from '../../../hooks/useNewEvent';
 import useKeyDown from '../../../hooks/useKeyDown';
 
-import './topControls.scss';
-
 const TopControls = () => {
   const { cancelEventCreation } = useNewEvent();
 

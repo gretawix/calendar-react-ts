@@ -7,8 +7,6 @@ import EventSettings from './EventSettings';
 import { useModal } from '../../hooks/useModal';
 import { useNewEvent } from '../../hooks/useNewEvent';
 
-import './EventCreationModal.scss';
-
 const Modal = () => {
   const { modalRef } = useModal();
   const { saveEvent } = useNewEvent();

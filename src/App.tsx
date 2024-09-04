@@ -6,7 +6,6 @@ import { useScroll } from './hooks/useScroll';
 import Modal from './components/EventCreationModal';
 import { useModal } from './hooks/useModal';
 
-import './App.scss';
 import { cellHeightInPx } from './constants';
 
 function App() {

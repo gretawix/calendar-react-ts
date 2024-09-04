@@ -3,8 +3,6 @@ import Button from '../../Button';
 import GenericSetting from '../GenericSetting';
 import TimeDate from '../TimeDate';
 
-import './eventSettings.scss';
-
 const EventSettings = () => {
   return (
     <div className="event-settings-selection">

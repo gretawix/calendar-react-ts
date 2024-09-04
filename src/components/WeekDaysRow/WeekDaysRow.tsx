@@ -1,7 +1,5 @@
 import WeekDay from '../WeekDay';
 import { forwardRef, memo } from 'react';
-
-import './weekDaysRow.scss';
 import { useDate } from '../../hooks/useDate';
 
 type WeekDaysRowProps = {

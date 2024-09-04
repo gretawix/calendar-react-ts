@@ -5,8 +5,6 @@ import { useDate } from '../../hooks/useDate';
 import { useNewEvent } from '../../hooks/useNewEvent';
 import type { ScrollRef } from '../../types';
 
-import './timeGrid.scss';
-
 type TimeGridProps = {
   onHorizontalScroll: () => void;
 };

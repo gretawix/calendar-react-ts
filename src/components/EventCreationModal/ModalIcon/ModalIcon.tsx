@@ -3,8 +3,6 @@ import MaterialIcon from '../../MaterialIcon';
 
 import type { IconName } from '../../../types';
 
-import './modalIcon.scss';
-
 type ModalIconProps = {
   iconName: IconName | 'google-meets';
 };

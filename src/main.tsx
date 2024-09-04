@@ -8,8 +8,6 @@ import { AllEventProvider } from './contexts/AllEventsContext.tsx';
 import { queryClient } from './query.ts';
 import App from './App.tsx';
 import './index.scss';
-import './styles/inputs.scss';
-
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
     <QueryClientProvider client={queryClient}>
