@@ -15,12 +15,9 @@ import TimeDatePreview from './TimeDatePreview';
 
 const TimeDate = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const [formDate, setFormDate] = useState('');
-  const [formStartTime, setFormStartTime] = useState('');
-  const [formEndTime, setFormEndTime] = useState('');
   const { updateDate, updateStartTime, updateEndTime } = useTimeDateUpdate();
-
   const { newEventData } = useNewEvent();
+
   const date = `${newEventData.weekDayLong}, ${newEventData.monthLong} ${newEventData.day}`;
   const startTime = getTime(newEventData.startTimeInMinutes);
   const endTime = getTime(
@@ -45,12 +42,7 @@ const TimeDate = () => {
 
   useEffect(() => {
     setIsOpen(false);
-    setFormDate(date);
-  }, [date, setFormDate]);
-
-  useEffect(() => {
-    setFormStartTime(startTime);
-  }, [setFormStartTime, startTime]);
+  }, [date]);
 
   if (isOpen) {
     return (
@@ -63,22 +55,19 @@ const TimeDate = () => {
                 defaultValue={date}
                 id="date"
                 style={{ width: 170 }}
-                onBlur={() => updateDate(formDate)}
-                onChange={(event) => setFormDate(event.target.value)}
+                onBlur={(event) => updateDate(event.target.value)}
               />
               <TextInput
                 defaultValue={startTime}
                 id="time-start"
                 style={{ width: 52 }}
-                onBlur={() => updateStartTime(formStartTime)}
-                onChange={(event) => setFormStartTime(event.target.value)}
+                onBlur={(event) => updateStartTime(event.target.value)}
               />
               <TextInput
                 defaultValue={endTime}
                 id="time-end"
                 style={{ width: 52 }}
-                onBlur={() => updateEndTime(formEndTime)}
-                onChange={(event) => setFormEndTime(event.target.value)}
+                onBlur={(event) => updateEndTime(event.target.value)}
               />
             </div>
             <div className="time-date-other-settings">
