@@ -30,4 +30,5 @@ export type NewEventContextType = {
 
 export type AllEventsContextType = {
   allEvents: SingleEvent[];
+  updateAllEvents: (newEventData: SingleEvent) => void;
 };

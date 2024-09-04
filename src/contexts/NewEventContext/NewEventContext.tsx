@@ -5,13 +5,13 @@ import {
   useCallback,
   useEffect,
 } from 'react';
-import { eventsService } from '../../eventService';
 import { useModal } from '../../hooks/useModal';
 import { positionModalX, positionModalY } from './utils';
 import { constructNewEvent, getDefaultEvent } from './utils';
 
 import type { NewEventContextType, initNewEventFn } from '../contextTypes';
 import type { SingleEvent } from '../../types';
+import { useAllEvents } from '../../hooks/useAllEvents';
 
 const defaultEvent = getDefaultEvent();
 
@@ -27,6 +27,7 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
   );
   const [newEventData, setNewEventData] = useState<SingleEvent>(defaultEvent);
   const { openModal, closeModal, modalRef, isModalOpen } = useModal();
+  const { updateAllEvents } = useAllEvents();
   const eventTarget = clickedEvent?.target;
   const [activeTileColId, setActiveTileColId] = useState(
     eventTarget instanceof HTMLElement ? eventTarget.id : ''
@@ -54,8 +55,8 @@ export const EventsProvider: React.FC<{ children: ReactNode }> = ({
 
   const saveEvent = useCallback(() => {
     cancelEventCreation();
-    eventsService.saveEvent(newEventData);
-  }, [cancelEventCreation, newEventData]);
+    updateAllEvents(newEventData);
+  }, [cancelEventCreation, newEventData, updateAllEvents]);
 
   useEffect(() => {
     if (isModalOpen && clickedEvent && modalRef.current) {
