@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import EventTile from '../Tile/EventTile';
+import EventTile from '../EventTile';
 import './gridColumn.scss';
 import { useEvents } from '../../hooks/useEvents';
 

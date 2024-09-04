@@ -5,13 +5,12 @@ import '../../styles/buttons.scss';
 
 type ButtonProps = {
   title: string;
-  styleType?: 'selected' | 'cta' | 'inline' | 'clickable';
   type?: React.ButtonHTMLAttributes<unknown>['type'];
 } & React.ButtonHTMLAttributes<HTMLButtonElement>;
 
-const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ title, styleType, className, type, ...rest }, ref) => {
-    const buttonClass = classNames(className, styleType);
+const TextButton = forwardRef<HTMLButtonElement, ButtonProps>(
+  ({ title, className, type, ...rest }, ref) => {
+    const buttonClass = classNames(className, 'clickable');
     return (
       <>
         <button
@@ -20,11 +19,11 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           ref={ref}
           {...rest}
         >
-          {styleType === 'clickable' ? <span>{title}</span> : title}
+          <span>{title}</span>
         </button>
       </>
     );
   }
 );
 
-export default memo(Button);
+export default memo(TextButton);

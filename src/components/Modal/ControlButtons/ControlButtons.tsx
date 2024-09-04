@@ -1,9 +1,9 @@
 import { memo } from 'react';
-import Button from '../../../Button/Button';
-import { useEvents } from '../../../../hooks/useEvents';
+import Button from '../../Button';
+import { useEvents } from '../../../hooks/useEvents';
 
 import './controlButtons.scss';
-import type { InputRefs } from '../../../../types/main';
+import type { InputRefs } from '../../../types';
 
 type ControlButtonsProps = {
   inputRefs: InputRefs;

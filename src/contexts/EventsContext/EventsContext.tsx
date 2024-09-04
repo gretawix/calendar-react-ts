@@ -7,13 +7,13 @@ import {
   useEffect,
 } from 'react';
 import { useQuery } from '@tanstack/react-query';
-import { eventsServiceFactory } from '../dataFactories/eventsFactory';
-import { useModal } from '../hooks/useModal';
-import { positionModalX, positionModalY } from '../utils/positioning';
-import { constructNewEvent, getDefaultEvent } from '../utils/events';
+import { eventsServiceFactory } from '../../dataFactories/eventsFactory';
+import { useModal } from '../../hooks/useModal';
+import { positionModalX, positionModalY } from './utils';
+import { constructNewEvent, getDefaultEvent } from './utils';
 
-import type { EventsContextType, initNewEventFn } from './contextTypes';
-import type { SingleEvent, EventsDataSource } from '../types/main';
+import type { EventsContextType, initNewEventFn } from '../contextTypes';
+import type { SingleEvent, EventsDataSource } from '../../types';
 
 const dataSourceType: EventsDataSource = 'local-storage';
 const defaultEvent = getDefaultEvent();

@@ -1,7 +1,7 @@
-import WeekDay from '../WeekDay/WeekDay';
+import WeekDay from '../WeekDay';
 import { forwardRef, memo } from 'react';
 
-import './weekDayRow.scss';
+import './weekDaysRow.scss';
 import { useDate } from '../../hooks/useDate';
 
 type WeekDaysRowProps = {
@@ -17,7 +17,7 @@ const WeekDaysRow = forwardRef<HTMLDivElement, WeekDaysRowProps>(
         <div className="time-zone-cell">
           <p className="time-zone">{timeZone}</p>
         </div>
-        <div className="week-days" id="days-row" ref={ref} onScroll={onScroll}>
+        <div className="week-days" ref={ref} onScroll={onScroll}>
           <div className="divider-no-border"></div>
           {week.map((oneDay) => (
             <WeekDay

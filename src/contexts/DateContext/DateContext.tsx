@@ -1,12 +1,8 @@
 import { createContext, useMemo, useState, ReactNode } from 'react';
-import {
-  createDay,
-  createHoursList,
-  getCurrentWeek,
-  getTimeZone,
-} from '../utils/timeCalculations';
+import { createDay } from './utils';
+import { getTimeZone, getCurrentWeek, createHoursList } from './utils';
 
-import type { DateContextType } from './contextTypes';
+import type { DateContextType } from '../contextTypes';
 
 export const DateContext = createContext<DateContextType | undefined>(
   undefined

@@ -1,8 +1,8 @@
 import { forwardRef, memo } from 'react';
 
 import './eventTile.scss';
-import { cellHeightInPx } from '../../constants/constants';
-import { getTime } from '../../utils/timeCalculations';
+import { cellHeightInPx } from '../../constants';
+import { getTime } from '../../utils/time';
 
 type TileProps = {
   existingEvent: boolean;

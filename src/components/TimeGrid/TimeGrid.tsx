@@ -1,9 +1,9 @@
 import { forwardRef, memo, useRef } from 'react';
-import GridColumn from '../GridColumn/GridColumn';
+import GridColumn from '../GridColumn';
 import { useScroll } from '../../hooks/useScroll';
 import { useDate } from '../../hooks/useDate';
 import { useEvents } from '../../hooks/useEvents';
-import type { ScrollRef } from '../../types/main';
+import type { ScrollRef } from '../../types';
 
 import './timeGrid.scss';
 

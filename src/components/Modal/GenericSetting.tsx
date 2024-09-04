@@ -1,7 +1,7 @@
 import { memo, ReactNode } from 'react';
 
-import type { IconName } from '../../../types/main';
-import ModalIcon from '../ModalIcon/ModalIcon';
+import type { IconName } from '../../types';
+import ModalIcon from './ModalIcon';
 
 type OneSettingProps = {
   iconName?: IconName | 'google-meets';

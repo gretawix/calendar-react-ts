@@ -1,8 +1,4 @@
-import type {
-  EventsService,
-  SingleEvent,
-  EventsDataSource,
-} from '../types/main';
+import type { EventsService, SingleEvent, EventsDataSource } from '../types';
 
 const eventsLocalStorageKey = 'events';
 const initialEvents: SingleEvent[] = [];

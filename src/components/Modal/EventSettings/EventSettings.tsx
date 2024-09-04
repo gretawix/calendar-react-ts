@@ -1,10 +1,10 @@
 import { memo } from 'react';
-import Button from '../../../Button/Button';
+import Button from '../../Button';
 import GenericSetting from '../GenericSetting';
-import TimeDate from '../../TimeDate/TimeDate';
+import TimeDate from '../TimeDate';
 
 import './eventSettings.scss';
-import type { InputRefs } from '../../../../types/main';
+import type { InputRefs } from '../../../types';
 
 type EventSettingsProps = {
   inputRefs: InputRefs;

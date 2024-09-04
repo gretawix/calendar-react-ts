@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import type { IconName } from '../../types/main';
+import type { IconName } from '../../types';
 
 import './materialIcon.scss';
 

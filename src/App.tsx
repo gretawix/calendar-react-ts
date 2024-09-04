@@ -1,13 +1,13 @@
 import { memo, useEffect, useRef } from 'react';
-import WeekDaysRow from './components/WeekDaysRow/WeekDayRow';
+import WeekDaysRow from './components/WeekDaysRow';
 
-import TimeGrid from './components/TimeGrid/TimeGrid';
+import TimeGrid from './components/TimeGrid';
 import { useScroll } from './hooks/useScroll';
-import Modal from './components/Modal/Modal';
+import Modal from './components/Modal';
 import { useModal } from './hooks/useModal';
 
 import './App.scss';
-import { cellHeightInPx } from './constants/constants';
+import { cellHeightInPx } from './constants';
 
 function App() {
   const { isModalOpen } = useModal();
@@ -26,18 +26,17 @@ function App() {
   };
 
   useEffect(() => {
-    document.documentElement.style.setProperty(
-      '--cell-height',
-      `${cellHeightInPx}px`
-    );
     if (timeGridRef.current) {
       timeGridRef.current.scrollTop = cellHeightInPx * 8;
     }
   }, []);
 
   return (
-    <div className="calendar">
-      <div className="week-view" id="week-view">
+    <div
+      className="calendar"
+      style={{ '--cell-height': `${cellHeightInPx}px` } as React.CSSProperties}
+    >
+      <div className="week-view">
         <WeekDaysRow onScroll={onWeekDaysScroll} ref={weekDaysRowRef} />
         <TimeGrid onHorizontalScroll={onTimeGridScroll} ref={timeGridRef} />
         {isModalOpen && <Modal />}

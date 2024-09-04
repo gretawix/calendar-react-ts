@@ -1,7 +1,7 @@
 import { memo } from 'react';
-import MaterialSymbol from '../../../MaterialIcon/MaterialIcon';
-import { useEvents } from '../../../../hooks/useEvents';
-import useKeyDown from '../../../../hooks/useKeyDown';
+import MaterialSymbol from '../../MaterialIcon';
+import { useEvents } from '../../../hooks/useEvents';
+import useKeyDown from '../../../hooks/useKeyDown';
 
 import './topControls.scss';
 

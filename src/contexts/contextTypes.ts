@@ -1,4 +1,4 @@
-import type { OneWeekDay, SingleEvent } from '../types/main';
+import type { OneWeekDay, SingleEvent } from '../types';
 
 export type initNewEventFn = (event: React.MouseEvent) => void;
 

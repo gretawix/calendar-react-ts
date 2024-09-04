@@ -1,7 +1,7 @@
 import { memo } from 'react';
-import MaterialIcon from '../../MaterialIcon/MaterialIcon';
+import MaterialIcon from '../../MaterialIcon';
 
-import type { IconName } from '../../../types/main';
+import type { IconName } from '../../../types';
 
 import './modalIcon.scss';
 

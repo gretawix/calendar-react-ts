@@ -9,7 +9,7 @@ import type {
   WeekDayNamesShort,
   MonthNamesLong,
   MonthNamesShort,
-} from './main';
+} from '.';
 
 const isWeekDayLong = (value: string): value is WeekDayNamesLong => {
   return value in WEEK_DAYS_LONG;

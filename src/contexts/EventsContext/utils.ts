@@ -1,4 +1,7 @@
-import { cellHeightInPx } from '../constants/constants';
+import { cellHeightInPx, defaultEventLengthInMinutes } from '../../constants';
+import { SingleEvent } from '../../types';
+import { MONTHS, WEEK_DAYS } from '../../types/constants';
+import { constructBasicDay } from '../../utils/time';
 
 export const positionModalX = (
   event: React.MouseEvent,
@@ -47,4 +50,42 @@ export const getTilePositionFromClick = (event: React.MouseEvent) => {
   const increment = cellHeightInPx / 2;
 
   return Math.floor(clickPosition / increment) * increment;
+};
+
+const getStartTimeFromClick = (event: React.MouseEvent) => {
+  const adjustedDistanceFromTop = getTilePositionFromClick(event);
+
+  return (adjustedDistanceFromTop / cellHeightInPx) * 60;
+};
+
+export const constructNewEvent = (
+  event: React.MouseEvent,
+  activeTileColId: string
+): SingleEvent => {
+  const day = constructBasicDay(activeTileColId);
+  const startTime = getStartTimeFromClick(event);
+
+  return {
+    ...day,
+    title: '(no title)',
+    weekDayLong: WEEK_DAYS[day.weekDay],
+    monthLong: MONTHS[day.month],
+    startTimeInMinutes: startTime,
+    eventLengthInMinutes: defaultEventLengthInMinutes,
+  };
+};
+
+export const getDefaultEvent = (): SingleEvent => {
+  const today = new Date();
+  const day = constructBasicDay(today);
+  const defaultStartTime = 9 * 60;
+
+  return {
+    ...day,
+    title: '(no title)',
+    weekDayLong: WEEK_DAYS[day.weekDay],
+    monthLong: MONTHS[day.month],
+    startTimeInMinutes: defaultStartTime,
+    eventLengthInMinutes: defaultStartTime + defaultEventLengthInMinutes,
+  };
 };

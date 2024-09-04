@@ -1,13 +1,13 @@
 import { memo, useRef } from 'react';
-import Button from '../Button/Button';
-import TopControls from './subComponents/TopControls/TopControls';
-import ControlButtons from './subComponents/ControlButtons/ControlButtons';
-import EventTitle from './subComponents/EventTitle/EventTitle';
-import EventSettings from './subComponents/EventSettings/EventSettings';
+import Button from '../Button';
+import TopControls from './TopControls';
+import ControlButtons from './ControlButtons';
+import EventTitle from './EventTitle';
+import EventSettings from './EventSettings';
 import { useModal } from '../../hooks/useModal';
 
 import './modal.scss';
-import type { InputRefs } from '../../types/main';
+import type { InputRefs } from '../../types';
 
 const Modal = () => {
   const { modalRef } = useModal();

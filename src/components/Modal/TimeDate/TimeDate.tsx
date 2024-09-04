@@ -1,17 +1,19 @@
 import { memo, useCallback, useEffect, useState } from 'react';
-import Button from '../../Button/Button';
-import Dropdown from '../../Dropdown/Dropdown';
-import ModalIcon from '../ModalIcon/ModalIcon';
+import Button from '../../Button';
+import Dropdown from '../../Dropdown';
+import ModalIcon from '../ModalIcon';
 import TextInput from '../../inputs/TextInput';
 import { useEvents } from '../../../hooks/useEvents';
-import { getDate, getTime } from '../../../utils/timeCalculations';
-import { updateEventDate } from '../../../utils/events';
-
-import type { IconName, RefObjectMap } from '../../../types/main';
-
-import './timeDate.scss';
+import { getTime } from '../../../utils/time';
+import { getDate } from './utils';
+import { updateEventDate } from './utils';
+import TextButton from '../../TextButton';
 import { useDate } from '../../../hooks/useDate';
 import { SHORT_MONTHS_NAMES } from '../../../types/constants';
+
+import type { IconName, RefObjectMap } from '../../../types';
+
+import './timeDate.scss';
 
 type TimeDateProps = {
   dateTimeInputRefs: RefObjectMap<'date' | 'startTime' | 'endTime'>;
@@ -78,10 +80,10 @@ const TimeDate = ({ dateTimeInputRefs }: TimeDateProps) => {
           >
             <div className="time-date-select">
               <p>
-                <Button styleType="clickable" title={date} id="date-btn" />
-                <Button styleType="clickable" title={startTime} id="date-btn" />
+                <TextButton title={date} />
+                <TextButton title={startTime} />
                 -
-                <Button styleType="clickable" title={endTime} id="date-btn" />
+                <TextButton title={endTime} />
               </p>
               <ul className="action-description">
                 <li>Time zone</li>
