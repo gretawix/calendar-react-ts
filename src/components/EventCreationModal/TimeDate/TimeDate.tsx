@@ -136,7 +136,7 @@ const TimeDate = ({ dateTimeInputRefs }: TimeDateProps) => {
             </label>
             <Button title="Time zone" />
           </div>
-          <Dropdown options={repeatOptions} />
+          <Dropdown options={repeatOptions} initialValue={repeatOptions[0]} />
         </div>
       </div>
     </div>

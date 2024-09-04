@@ -4,10 +4,10 @@ import classNames from 'classnames';
 import './dropdown.scss';
 import '../../styles/buttons.scss';
 
-type DropdownProps = { options: string[] };
+type DropdownProps = { options: string[]; initialValue: string };
 
-const Dropdown = ({ options }: DropdownProps) => {
-  const [selected, setSelected] = useState(options[0]);
+const Dropdown = ({ options, initialValue }: DropdownProps) => {
+  const [selected, setSelected] = useState(initialValue);
   const [isOpen, setIsOpen] = useState(false);
 
   const selectItem = (item: string) => {
