@@ -1,37 +1,42 @@
-import { memo, useRef } from 'react';
+import { memo, useState } from 'react';
 import Button from '../Button';
 import TopControls from './TopControls';
 import ControlButtons from './ControlButtons';
 import EventTitle from './EventTitle';
 import EventSettings from './EventSettings';
 import { useModal } from '../../hooks/useModal';
+import { useNewEvent } from '../../hooks/useNewEvent';
 
 import './EventCreationModal.scss';
-import type { InputRefs } from '../../types';
 
 const Modal = () => {
   const { modalRef } = useModal();
-  const inputRefs: InputRefs = {
-    title: useRef<HTMLInputElement>(null),
-    date: useRef<HTMLInputElement>(null),
-    startTime: useRef<HTMLInputElement>(null),
-    endTime: useRef<HTMLInputElement>(null),
+  const { saveEvent } = useNewEvent();
+  const [title, setTitle] = useState('');
+  const [formDate, setNewFormDate] = useState('');
+
+  const handleSaveClick = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    saveEvent();
   };
 
   return (
     <div className="event-modal" ref={modalRef}>
       <TopControls />
-      <form className="event-content">
-        <EventTitle titleRef={inputRefs.title} />
+      <form
+        className="event-content"
+        onSubmit={(event) => handleSaveClick(event)}
+      >
+        <EventTitle title={title} updateTitle={setTitle} />
         <div className="event-settings">
           <div className="event-type-buttons">
             <Button title="Event" styleType="selected" />
             <Button title="Task" />
             <Button title="Appointment schedule" />
           </div>
-          <EventSettings inputRefs={inputRefs} />
+          <EventSettings formDate={formDate} updateDate={setNewFormDate} />
         </div>
-        <ControlButtons inputRefs={inputRefs} />
+        <ControlButtons />
       </form>
     </div>
   );

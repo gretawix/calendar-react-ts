@@ -4,22 +4,16 @@ import GenericSetting from '../GenericSetting';
 import TimeDate from '../TimeDate';
 
 import './eventSettings.scss';
-import type { InputRefs } from '../../../types';
 
 type EventSettingsProps = {
-  inputRefs: InputRefs;
+  formDate: string;
+  updateDate: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const EventSettings = ({ inputRefs }: EventSettingsProps) => {
+const EventSettings = ({ formDate, updateDate }: EventSettingsProps) => {
   return (
     <div className="event-settings-selection">
-      <TimeDate
-        dateTimeInputRefs={{
-          date: inputRefs.date,
-          startTime: inputRefs.startTime,
-          endTime: inputRefs.endTime,
-        }}
-      />
+      <TimeDate formDate={formDate} onDateUpdate={updateDate} />
       <GenericSetting>
         <Button title="Find a time" styleType="inline" />
       </GenericSetting>

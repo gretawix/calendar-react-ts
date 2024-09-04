@@ -31,8 +31,13 @@ const EventTile = forwardRef<HTMLDivElement, TileProps>(
       placeholder: !existingEvent,
     });
 
+    const handleClick = (event: React.MouseEvent<HTMLDivElement>) => {
+      event.stopPropagation();
+    };
+
     return (
       <div
+        onClick={handleClick}
         ref={ref}
         className={tileClasses}
         style={{ top: distanceFromTop, height: tileLength }}

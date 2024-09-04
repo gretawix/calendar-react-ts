@@ -11,16 +11,17 @@ import TextButton from '../../TextButton';
 import { useDate } from '../../../hooks/useDate';
 import { SHORT_MONTHS_NAMES } from '../../../types/constants';
 
-import type { IconName, RefObjectMap } from '../../../types';
+import type { IconName } from '../../../types';
 
 import './timeDate.scss';
 import classNames from 'classnames';
 
 type TimeDateProps = {
-  dateTimeInputRefs: RefObjectMap<'date' | 'startTime' | 'endTime'>;
+  formDate: string;
+  onDateUpdate: React.Dispatch<React.SetStateAction<string>>;
 };
 
-const TimeDate = ({ dateTimeInputRefs }: TimeDateProps) => {
+const TimeDate = ({ formDate, onDateUpdate }: TimeDateProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const { newEventData, setNewEventData, setActiveTileColId } = useNewEvent();
   const { week } = useDate();
@@ -33,7 +34,7 @@ const TimeDate = ({ dateTimeInputRefs }: TimeDateProps) => {
 
   const setNewDate = useCallback(() => {
     setNewEventData((prevEventData) => {
-      const newDate = dateTimeInputRefs?.date?.current?.value || '';
+      const newDate = formDate;
       const newDateObj = getDate(newDate);
       const targetWeekDay = week.find(
         (oneday) =>
@@ -52,7 +53,7 @@ const TimeDate = ({ dateTimeInputRefs }: TimeDateProps) => {
         newDateObj.day
       );
     });
-  }, [dateTimeInputRefs?.date, setActiveTileColId, setNewEventData, week]);
+  }, [formDate, setActiveTileColId, setNewEventData, week]);
 
   const iconName: IconName = 'schedule';
 
@@ -74,7 +75,8 @@ const TimeDate = ({ dateTimeInputRefs }: TimeDateProps) => {
 
   useEffect(() => {
     setIsOpen(false);
-  }, [date]);
+    onDateUpdate(date);
+  }, [date, onDateUpdate]);
 
   if (!isOpen) {
     return (
@@ -87,7 +89,7 @@ const TimeDate = ({ dateTimeInputRefs }: TimeDateProps) => {
           >
             <div className="time-date-select">
               <p>
-                <TextButton title={date} />
+                <TextButton title={formDate} />
                 <TextButton title={startTime} />
                 -
                 <TextButton title={endTime} />
@@ -111,20 +113,18 @@ const TimeDate = ({ dateTimeInputRefs }: TimeDateProps) => {
           <div className="time-date-inputs-wrapper">
             <TextInput
               defaultValue={date}
-              ref={dateTimeInputRefs.date}
               id="date"
               style={{ width: 170 }}
               onBlur={setNewDate}
+              onChange={(event) => onDateUpdate(event.target.value)}
             />
             <TextInput
               defaultValue={startTime}
-              ref={dateTimeInputRefs.startTime}
               id="time-start"
               style={{ width: 52 }}
             />
             <TextInput
               defaultValue={endTime}
-              ref={dateTimeInputRefs.endTime}
               id="time-end"
               style={{ width: 52 }}
             />
