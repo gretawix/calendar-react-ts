@@ -10,10 +10,6 @@ const Dropdown = ({ options }: DropdownProps) => {
   const [selected, setSelected] = useState(options[0]);
   const [isOpen, setIsOpen] = useState(false);
 
-  const generateId = (text: string) => {
-    return text.toLowerCase().replace(/\s/g, '-').replace(/[()]/g, '');
-  };
-
   const selectItem = (item: string) => {
     setSelected(item);
     setIsOpen(false);
@@ -46,7 +42,6 @@ const Dropdown = ({ options }: DropdownProps) => {
             return (
               <li
                 key={item}
-                id={generateId(item)}
                 className={itemClass}
                 onClick={() => selectItem(item)}
               >

@@ -30,7 +30,6 @@ const TimeGrid = forwardRef<HTMLDivElement, TimeGridProps>(function TimeGrid(
     <div className="time-grid">
       <div
         className="hours-labels-column"
-        id="hours-col"
         ref={hourColRef}
         onScroll={() => handleVerticalScroll(hourColRef, ref as ScrollRef)}
       >
@@ -40,12 +39,7 @@ const TimeGrid = forwardRef<HTMLDivElement, TimeGridProps>(function TimeGrid(
           </div>
         ))}
       </div>
-      <div
-        className="hours-cells-all"
-        id="days-hours-grid"
-        ref={ref}
-        onScroll={handleGridScroll}
-      >
+      <div className="hours-cells-all" ref={ref} onScroll={handleGridScroll}>
         <div className="divider-column">
           {hoursList.map((hour) => (
             <div key={hour} className="divider cell-height"></div>

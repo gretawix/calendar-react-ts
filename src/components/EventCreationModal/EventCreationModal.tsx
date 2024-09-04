@@ -19,7 +19,7 @@ const Modal = () => {
   };
 
   return (
-    <div className="event-modal" id="event-modal" ref={modalRef}>
+    <div className="event-modal" ref={modalRef}>
       <TopControls />
       <form className="event-content">
         <EventTitle titleRef={inputRefs.title} />

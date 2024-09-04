@@ -134,7 +134,7 @@ const TimeDate = ({ dateTimeInputRefs }: TimeDateProps) => {
               All day <input type="checkbox" id="all-day" />
               <span className="checkmark"></span>
             </label>
-            <Button title="Time zone" id="time-zone" />
+            <Button title="Time zone" />
           </div>
           <Dropdown options={repeatOptions} />
         </div>

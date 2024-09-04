@@ -12,6 +12,7 @@ const EventTitle = ({ titleRef }: EventTitleProps) => {
         <input
           type="text"
           id="title"
+          name="title"
           placeholder="Add title"
           className="text-input large"
           ref={titleRef}

@@ -30,7 +30,6 @@ const ControlButtons = ({ inputRefs }: ControlButtonsProps) => {
       <Button
         title="Save"
         styleType="cta"
-        id="save-event-btn"
         type="submit"
         onClick={handleSaveClick}
       />
