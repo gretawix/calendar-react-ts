@@ -1,13 +1,9 @@
-import { memo, useCallback } from 'react';
+import { memo, useCallback, useState } from 'react';
 import './eventTitle.scss';
 import { useNewEvent } from '../../../hooks/useNewEvent';
 
-type EventTitleProps = {
-  title: string;
-  updateTitle: React.Dispatch<React.SetStateAction<string>>;
-};
-
-const EventTitle = ({ title, updateTitle }: EventTitleProps) => {
+const EventTitle = () => {
+  const [title, setTitle] = useState('');
   const { setNewEventData } = useNewEvent();
 
   const setNewTitle = useCallback(() => {
@@ -30,7 +26,7 @@ const EventTitle = ({ title, updateTitle }: EventTitleProps) => {
           className="text-input large"
           autoFocus
           value={title}
-          onChange={(event) => updateTitle(event.target.value)}
+          onChange={(event) => setTitle(event.target.value)}
           onBlur={setNewTitle}
         />
       </label>

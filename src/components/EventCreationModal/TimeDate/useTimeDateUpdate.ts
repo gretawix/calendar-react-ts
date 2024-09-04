@@ -3,7 +3,7 @@ import { getDate, updateEventDate } from './utils';
 import { OneWeekDay, SingleEvent } from '../../../types';
 import { getMinutes } from '../../../utils/time';
 
-const updateModalDate = (
+const updateDate = (
   setNewEventData: React.Dispatch<React.SetStateAction<SingleEvent>>,
   formDate: string,
   week: OneWeekDay[],
@@ -30,7 +30,7 @@ const updateModalDate = (
   });
 };
 
-const updateModalStartTime = (
+const updateStartTime = (
   setNewEventData: React.Dispatch<React.SetStateAction<SingleEvent>>,
   formStartTime: string
 ) => {
@@ -43,8 +43,22 @@ const updateModalStartTime = (
   });
 };
 
+const updateEndTime = (
+  setNewEventData: React.Dispatch<React.SetStateAction<SingleEvent>>,
+  formEndTime: string
+) => {
+  setNewEventData((prevEventData) => {
+    const updatedData = { ...prevEventData };
+    const endTimeInMinutes = getMinutes(formEndTime);
+    const newEventLength = endTimeInMinutes - updatedData.startTimeInMinutes;
+    updatedData.eventLengthInMinutes = newEventLength;
+
+    return updatedData;
+  });
+};
+
 const useTimeDateUpdate = () => {
-  return { updateModalDate, updateModalStartTime };
+  return { updateDate, updateStartTime, updateEndTime };
 };
 
 export default useTimeDateUpdate;

@@ -1,4 +1,4 @@
-import { memo, useState } from 'react';
+import { memo } from 'react';
 import Button from '../Button';
 import TopControls from './TopControls';
 import ControlButtons from './ControlButtons';
@@ -12,9 +12,6 @@ import './EventCreationModal.scss';
 const Modal = () => {
   const { modalRef } = useModal();
   const { saveEvent } = useNewEvent();
-  const [title, setTitle] = useState('');
-  const [startTime, setStartTime] = useState('');
-  const [formDate, setNewFormDate] = useState('');
 
   const handleSaveClick = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -28,19 +25,14 @@ const Modal = () => {
         className="event-content"
         onSubmit={(event) => handleSaveClick(event)}
       >
-        <EventTitle title={title} updateTitle={setTitle} />
+        <EventTitle />
         <div className="event-settings">
           <div className="event-type-buttons">
             <Button title="Event" styleType="selected" />
             <Button title="Task" />
             <Button title="Appointment schedule" />
           </div>
-          <EventSettings
-            formDate={formDate}
-            updateDate={setNewFormDate}
-            formStartTime={startTime}
-            updateStartTime={setStartTime}
-          />
+          <EventSettings />
         </div>
         <ControlButtons />
       </form>

@@ -14,20 +14,13 @@ import './timeDate.scss';
 import classNames from 'classnames';
 import TimeDatePreview from './TimeDatePreview';
 
-type TimeDateProps = {
-  formDate: string;
-  formStartTime: string;
-  onDateUpdate: React.Dispatch<React.SetStateAction<string>>;
-  onStartTimeUpdate: React.Dispatch<React.SetStateAction<string>>;
-};
-
-const TimeDate = ({
-  formDate,
-  formStartTime,
-  onDateUpdate,
-  onStartTimeUpdate,
-}: TimeDateProps) => {
+const TimeDate = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [formDate, setFormDate] = useState('');
+  const [formStartTime, setFormStartTime] = useState('');
+  const [formEndTime, setFormEndTime] = useState('');
+  const { updateDate, updateStartTime, updateEndTime } = useTimeDateUpdate();
+
   const { newEventData, setNewEventData, setActiveTileColId } = useNewEvent();
   const { week } = useDate();
   const date = `${newEventData.weekDayLong}, ${newEventData.monthLong} ${newEventData.day}`;
@@ -35,7 +28,7 @@ const TimeDate = ({
   const endTime = getTime(
     newEventData.startTimeInMinutes + newEventData.eventLengthInMinutes
   );
-  const { updateModalDate, updateModalStartTime } = useTimeDateUpdate();
+
   const iconName: IconName = 'schedule';
   const previewClasses = classNames('modal-event-side-margins', {
     'has-icon': iconName,
@@ -53,21 +46,25 @@ const TimeDate = ({
   ];
 
   const setNewDate = useCallback(() => {
-    updateModalDate(setNewEventData, formDate, week, setActiveTileColId);
-  }, [formDate, setActiveTileColId, setNewEventData, updateModalDate, week]);
+    updateDate(setNewEventData, formDate, week, setActiveTileColId);
+  }, [formDate, setActiveTileColId, setNewEventData, updateDate, week]);
 
   const setNewStartTime = useCallback(() => {
-    updateModalStartTime(setNewEventData, formStartTime);
-  }, [formStartTime, setNewEventData, updateModalStartTime]);
+    updateStartTime(setNewEventData, formStartTime);
+  }, [formStartTime, setNewEventData, updateStartTime]);
+
+  const setNewEndTime = useCallback(() => {
+    updateEndTime(setNewEventData, formEndTime);
+  }, [formEndTime, setNewEventData, updateEndTime]);
 
   useEffect(() => {
     setIsOpen(false);
-    onDateUpdate(date);
-  }, [date, onDateUpdate]);
+    setFormDate(date);
+  }, [date, setFormDate]);
 
   useEffect(() => {
-    onStartTimeUpdate(startTime);
-  }, [onStartTimeUpdate, startTime]);
+    setFormStartTime(startTime);
+  }, [setFormStartTime, startTime]);
 
   if (isOpen) {
     return (
@@ -81,19 +78,21 @@ const TimeDate = ({
                 id="date"
                 style={{ width: 170 }}
                 onBlur={setNewDate}
-                onChange={(event) => onDateUpdate(event.target.value)}
+                onChange={(event) => setFormDate(event.target.value)}
               />
               <TextInput
                 defaultValue={startTime}
                 id="time-start"
                 style={{ width: 52 }}
                 onBlur={setNewStartTime}
-                onChange={(event) => onStartTimeUpdate(event.target.value)}
+                onChange={(event) => setFormStartTime(event.target.value)}
               />
               <TextInput
                 defaultValue={endTime}
                 id="time-end"
                 style={{ width: 52 }}
+                onBlur={setNewEndTime}
+                onChange={(event) => setFormEndTime(event.target.value)}
               />
             </div>
             <div className="time-date-other-settings">
